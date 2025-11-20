@@ -26,7 +26,10 @@ public class TemplateAnswerAgent implements AnswerAgent {
 
         // Get best chunk (first in reranked list)
         Hit bestHit = topHits.get(0);
-        Chunk bestChunk = bestHit.getChunk();
+        Chunk bestChunk = chunkStore.getChunk(bestHit.getDocId(), bestHit.getChunkId());
+        if (bestChunk == null) {
+            return new Answer("Üzgünüm, sorunuza ait detaylı metni bulamadım.", new ArrayList<>());
+        }
 
         // Select best sentence from chunk
         String bestSentence = selectBestSentence(bestChunk.getText(), queryTerms);
@@ -38,8 +41,11 @@ public class TemplateAnswerAgent implements AnswerAgent {
         List<String> citations = new ArrayList<>();
         for (int i = 0; i < Math.min(3, topHits.size()); i++) {
             Hit hit = topHits.get(i);
-            String citation = formatCitation(hit.getChunk());
-            citations.add(citation);
+            Chunk chunk = chunkStore.getChunk(hit.getDocId(), hit.getChunkId());
+            if (chunk != null) {
+                String citation = formatCitation(chunk);
+                citations.add(citation);
+            }
         }
 
         Answer answer = new Answer(answerText, citations);
