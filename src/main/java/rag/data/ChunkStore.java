@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package main.java.rag.data;
 
 import java.util.ArrayList;

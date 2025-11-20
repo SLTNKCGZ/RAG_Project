@@ -57,7 +57,8 @@ public abstract class RagPipeline {
             if(config.getIntentType().equals("RuleIntentDetector")){
                 IntentRulesLoader rulesLoader = new IntentRulesLoader();
                 Map<Intent, List<String>> rules = rulesLoader.loadRules(config.getRulesFilePath());
-                intentDetector = new RuleIntentDetector(rules);
+                List<Intent> priorityOrder = new java.util.ArrayList<>(rules.keySet());
+                intentDetector = new RuleIntentDetector(rules, priorityOrder);
             } else {
                 throw new IllegalArgumentException("Unknown intent detector type: " + config.getIntentType());
             }
@@ -114,7 +115,7 @@ public abstract class RagPipeline {
                 throw new IllegalArgumentException("Unknown retriever type: " + config.getRetrieverType());
             }
             
-            List<Hit> hits = retriever.retrieve(terms,context.getChunkStore());
+            List<Hit> hits = retriever.retrieve(terms, context.getChunkStore());
             context.setRetrievedHits(hits);
             outputsSummary = "hits=" + (hits != null ? hits.size() : 0) + " hits";
         } catch (Exception e) {
