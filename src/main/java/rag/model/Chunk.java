@@ -2,7 +2,6 @@ package main.java.rag.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Chunk {
     private String docId;
@@ -28,48 +27,24 @@ public class Chunk {
         return docId;
     }
     
-    public void setDocId(String docId) {
-        this.docId = docId;
-    }
-    
     public String getChunkId() {
         return chunkId;
-    }
-    
-    public void setChunkId(String chunkId) {
-        this.chunkId = chunkId;
     }
     
     public String getText() {
         return text;
     }
     
-    public void setText(String text) {
-        this.text = text;
-    }
-    
     public String getSectionId() {
         return sectionId;
-    }
-    
-    public void setSectionId(String sectionId) {
-        this.sectionId = sectionId;
     }
     
     public int getStartOffset() {
         return startOffset;
     }
     
-    public void setStartOffset(int startOffset) {
-        this.startOffset = startOffset;
-    }
-    
     public int getEndOffset() {
         return endOffset;
-    }
-    
-    public void setEndOffset(int endOffset) {
-        this.endOffset = endOffset;
     }
     
     public List<String> getSentences() {
@@ -102,24 +77,6 @@ public class Chunk {
     
     public String formatCitation() {
         return docId + ":" + sectionId + ":" + startOffset + "-" + endOffset;
-    }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Chunk chunk = (Chunk) o;
-        return startOffset == chunk.startOffset &&
-               endOffset == chunk.endOffset &&
-               Objects.equals(docId, chunk.docId) &&
-               Objects.equals(chunkId, chunk.chunkId) &&
-               Objects.equals(text, chunk.text) &&
-               Objects.equals(sectionId, chunk.sectionId);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(docId, chunkId, text, sectionId, startOffset, endOffset);
     }
     
     @Override

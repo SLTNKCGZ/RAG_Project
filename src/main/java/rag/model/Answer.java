@@ -2,7 +2,6 @@ package main.java.rag.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Answer {
     private String text;
@@ -34,10 +33,6 @@ public class Answer {
         return new ArrayList<>(citations);
     }
     
-    public void setCitations(List<String> citations) {
-        this.citations = citations != null ? new ArrayList<>(citations) : new ArrayList<>();
-    }
-    
     public void addCitation(String citation) {
         if (citation != null && !citation.isEmpty()) {
             citations.add(citation);
@@ -65,24 +60,10 @@ public class Answer {
     }
     
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Answer answer = (Answer) o;
-        return Objects.equals(text, answer.text) &&
-               Objects.equals(citations, answer.citations);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(text, citations);
-    }
-    
-    @Override
     public String toString() {
         return "Answer{" +
                "text='" + text + '\'' +
-               ", citations=" + citations.size() +
+               ", citations=" + (citations != null ? citations.size() : 0) +
                '}';
     }
 }
