@@ -1,0 +1,22 @@
+stop_words:
+  - "ve"
+  - "veya"
+  - "bir"
+  - "bu"
+  - "için"
+  - "olarak"
+  - "nedir"
+  - "nelerdir"
+  - "mi"
+  - "mı"
+
+# Basit stemming kuralları
+stemming_rules:
+  - from: "ları"
+    to: ""
+  - from: "leri" 
+    to: ""
+  - from: "lar"
+    to: ""
+  - from: "ler"
+    to: ""
