@@ -1,30 +1,23 @@
 package main.java.rag.model;
 
 public class Query {
-    private String question;
-    private Intent intent;
+    private String text;
     
     public Query() {
     }
     
-    public Query(String question, Intent intent) {
-        this.question = question;
-        this.intent = intent;
+    public Query(String text) {
+        this.text = text;
     }
     
-    public String getQuestion() {
-        return question;
-    }
-    
-    public Intent getIntent() {
-        return intent;
+    public String getText() {
+        return text;
     }
     
     @Override
     public String toString() {
         return "Query{" +
-               "question='" + question + '\'' +
-               ", intent=" + intent +
+               "text='" + text + '\'' +
                '}';
     }
 }
