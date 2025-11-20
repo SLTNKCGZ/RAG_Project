@@ -1,10 +1,11 @@
 package main.java.rag.retrieval;
 
-import rag.data.ChunksStore;
-import rag.model.Chunk;
-import rag.model.Hit;
+import main.java.rag.data.ChunkStore;
+import main.java.rag.model.Chunk;
+import main.java.rag.model.Hit;
 
 import java.util.*;
+
 
 public class KeywordRetriever implements Retriever {
 
@@ -15,7 +16,12 @@ public class KeywordRetriever implements Retriever {
     }
 
     @Override
-    public List<Hit> retrieve(List<String> queryTerms, ChunksStore store) {
+    public List<Hit> retrieve(List<String> queryTerms) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<Hit> retrieve(List<String> queryTerms, ChunkStore store) {
         if (queryTerms == null || queryTerms.isEmpty()) return Collections.emptyList();
 
         Map<String, Hit> hitMap = new HashMap<>();

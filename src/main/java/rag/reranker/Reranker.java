@@ -1,6 +1,6 @@
 package main.java.rag.reranker;
 import java.util.List;
-import rag.model.Hit;
+import main.java.rag.model.Hit;
 
 public interface Reranker {
     /**

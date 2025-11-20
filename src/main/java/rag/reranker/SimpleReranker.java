@@ -20,6 +20,10 @@ public class SimpleReranker implements Reranker {
     }
 
     @Override
+    public List<Hit> rerank(List<String> queryTerms, List<Hit> hits) {
+        return hits;
+    }
+
     public List<Hit> rerank(List<String> queryTerms, List<Hit> hits, ChunkStore store) {
         if (hits == null || hits.isEmpty()) return Collections.emptyList();
         List<Hit> reranked = new ArrayList<>();

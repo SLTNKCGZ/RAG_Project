@@ -1,7 +1,9 @@
 package main.java.rag.retrieval;
 
 import java.util.List;
-import rag.model.Hit;
+
+import main.java.rag.data.ChunkStore;
+import main.java.rag.model.Hit;
 
 public interface Retriever {
     /**
@@ -10,4 +12,6 @@ public interface Retriever {
      * @return Eşleşen Hit listesi
      */
     List<Hit> retrieve(List<String> terms);
+
+    List<Hit> retrieve(List<String> queryTerms, ChunkStore store);
 }
