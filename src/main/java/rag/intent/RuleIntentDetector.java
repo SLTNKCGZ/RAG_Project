@@ -7,23 +7,31 @@ import main.java.rag.model.Intent;
 public class RuleIntentDetector implements IntentDetector {
 
     private final Map<Intent, List<String>> rules;
+    private final List<Intent> priorityOrder;
 
-    public RuleIntentDetector(Map<Intent, List<String>> rules) {
+    // Yeni constructor: priorityOrder ConfigLoader tarafından gönderilecek
+    public RuleIntentDetector(Map<Intent, List<String>> rules,
+                              List<Intent> priorityOrder) {
         this.rules = rules;
+        this.priorityOrder = priorityOrder;
     }
 
     @Override
     public Intent detect(String question) {
-        if (question == null) {
+        if (question == null || question.trim().isEmpty()) {
             return Intent.Unknown;
         }
 
         String lower = question.toLowerCase();
 
-        for (Map.Entry<Intent, List<String>> entry : rules.entrySet()) {
-            for (String keyword : entry.getValue()) {
-                if (lower.contains(keyword.toLowerCase())) {
-                    return entry.getKey();
+        // INTENT PRIORITY SIRASINA GÖRE KONTROL
+        for (Intent intent : priorityOrder) {
+            List<String> keywords = rules.get(intent);
+            if (keywords == null) continue;
+
+            for (String keyword : keywords) {
+                if (keyword != null && lower.contains(keyword.toLowerCase())) {
+                    return intent;
                 }
             }
         }

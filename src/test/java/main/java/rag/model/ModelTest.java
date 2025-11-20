@@ -1,4 +1,4 @@
-package main.java.rag.model;
+package test.java.main.java.rag.model;
 
 public class ModelTest {
     
