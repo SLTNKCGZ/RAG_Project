@@ -1,0 +1,658 @@
+{
+  "documents": [
+    {
+      "docId": "1",
+      "title": "Staj Yönergesi",
+      "sections": [
+        {
+          "sectionId": "1.1",
+          "header": "Staj Esasları ve Başvuru Süreci",
+          "chunks": [
+            {
+              "chunkId": "1.1.1",
+              "startOffset": 0,
+              "endOffset": 485,
+              "content": "a temel bi̇lgi̇ler a1 öğrencilerimizin sektörü tanımaları meslek tecrübelerini geliştirmeleri bilgisayar mühendisliğinin farklı alanlarındaki uygulama ve iş ortamını deneyimleme derslerde öğrendikleri bilgileri işyerinde uygulama ve test etme üniversitesanayi işbirliğini geliştirme iş hayatına ilk adımlarını atmaları hedefleriyle staj yapmaları amaçlanmaktadır a2 öğrencilerin eğitimleri sırasında en az 60 iş günü staj yapmaları gerekir a3 staj dersleri a3a müfredatımızda iki adet staj dersi vardır"
+            },
+            {
+              "chunkId": "1.1.2",
+              "startOffset": 400,
+              "endOffset": 890,
+              "content": "sırasında en az 60 iş günü staj yapmaları gerekir a3 staj dersleri a3a müfredatımızda iki adet staj dersi vardır i cse3000 summer practice i yaz stajı i ii cse4000 summer practice ii yaz stajı ii a3b staj dersleri s satisfactory veya u unsatisfactory harfli başarı notlarıyla başarılı veya başarısız şeklinde notlandırılır a3c mezun olabilmek için her iki dersin başarıyla tamamlanması gerekir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "2",
+      "title": "Öğrenci Başarıları",
+      "sections": [
+        {
+          "sectionId": "2.1",
+          "header": "Yarışma ve Proje Ödülleri",
+          "chunks": [
+            {
+              "chunkId": "2.1.1",
+              "startOffset": 0,
+              "endOffset": 480,
+              "content": "son 3 senede 30 öğrencimiz 12 farklı yarışmada ödül almışlardır kendilerini tebrik ediyoruz öğrencilerimizin katılmış olduğu yarışmalarda aldıkları ödüller 2242 tubitak universite öğrenciler araştırma projeleri yarışmasında birincilik i̇lker fener abdullah gülçür tolga erbaş 2021 finlandiya drone tournament 2019 ikincilik ve özel ödül can berk durmuş elif balcı eylül 2019"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "3",
+      "title": "Ders Ön Koşul Ağacı",
+      "sections": [
+        {
+          "sectionId": "3.1",
+          "header": "Ders Bağlantıları ve Ön Şartlar",
+          "chunks": [
+            {
+              "chunkId": "3.1.1",
+              "startOffset": 0,
+              "endOffset": 495,
+              "content": "cse1241 computer programming i dersi cse1242 computer programming ii dersinin ön koşuludur cse1242 computer programming ii şu derslerin ön koşuludur cse2225 data structures cse2023 discrete comp structures cse2138 systems programming cse3038 computer organization aynı zamanda digital logic de gerektirir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "4",
+      "title": "Erasmus Bilgileri",
+      "sections": [
+        {
+          "sectionId": "4.1",
+          "header": "Erasmus Programı ve Koordinatörlük",
+          "chunks": [
+            {
+              "chunkId": "4.1.1",
+              "startOffset": 0,
+              "endOffset": 505,
+              "content": "marmara üniversitesi bilgisayar mühendisliği bölümü erasmus programı bilgileri erasmus programı yükseköğretim düzeyindeki işbirliğine yönelik bir programdır programın temel amacı yükseköğretimde kalitenin artırılması ve avrupa boyutunun güçlendirilmesidir program kapsamında yükseköğretim kurumlarının birbirleri ile ortak projeler üretip hayata geçirmeleri"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "5",
+      "title": "Akademik Kadro",
+      "sections": [
+        {
+          "sectionId": "5.1",
+          "header": "Öğretim Üyeleri Listesi",
+          "chunks": [
+            {
+              "chunkId": "5.1.1",
+              "startOffset": 0,
+              "endOffset": 500,
+              "content": "marmara üniversitesi bilgisayar mühendisliği akademik kadrosu prof dr haluk rahmi topçuoğlu bölüm başkanı phd computer eng syracuse university ms bilgisayar müh boğaziçi üniversitesi bs bilgisayar müh boğaziçi üniversitesi ofis m2217 dahili 3537 eposta halukmarmaraedutr prof dr ali fuat alkaya phd mühendislik yönetimi marmara üniversitesi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "6",
+      "title": "Araştırma Görevlileri",
+      "sections": [
+        {
+          "sectionId": "6.1",
+          "header": "Araştırma Görevlileri Listesi",
+          "chunks": [
+            {
+              "chunkId": "6.1.1",
+              "startOffset": 0,
+              "endOffset": 490,
+              "content": "marmara üniversitesi bilgisayar mühendisliği araştırma görevlileri arş gör serap korkmaz phd bilgisayar müh marmara üniversitesi devam ediyor ms bilgisayar müh marmara üniversitesi bs bilgisayar müh marmara üniversitesi ofis m2201 dahili 3548 eposta serapkorkmazmarmaraedutr arş gör zuhal altuntaş phd bilgisayar müh marmara üniversitesi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "7",
+      "title": "Program Bilgileri",
+      "sections": [
+        {
+          "sectionId": "7.1",
+          "header": "Bölüm Tanıtımı ve Tarihçe",
+          "chunks": [
+            {
+              "chunkId": "7.1.1",
+              "startOffset": 0,
+              "endOffset": 520,
+              "content": "marmara üni̇versi̇tesi̇ bi̇lgi̇sayar mühendi̇sli̇ği̇ bölümü program bi̇lgi̇leri̇ kuruluş ve tarihçe bilgisayar mühendisliği bölümü mühendislik fakültesiyle birlikte 27 temmuz 1987 yılında kurulmuştur i̇lk öğrencilerini 19901991 akademik yılında almış ve 1994 yılında ilk lisans mezunlarını vermiştir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "8",
+      "title": "Sıkça Sorulan Sorular",
+      "sections": [
+        {
+          "sectionId": "8.1",
+          "header": "Eğitim ve Bölüm Hakkında SSS",
+          "chunks": [
+            {
+              "chunkId": "8.1.1",
+              "startOffset": 0,
+              "endOffset": 510,
+              "content": "1 bilgisayar mühendisliği okumak için programlama bilmeme gerek var mı bilgisayar mühendisliği eğitiminin ilk yılından başlayarak alacağınız dersler ile programlamayı detayları ile öğreneceğiniz için programlama bilgisine ihtiyacınız yoktur 2 mühendislik fakültesi bilgisayar mühendisliği bölümünde lisans eğitimini alıp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "9",
+      "title": "Müfredat",
+      "sections": [
+        {
+          "sectionId": "9.1",
+          "header": "Lisans Ders Planı (Curriculum)",
+          "chunks": [
+            {
+              "chunkId": "9.1.1",
+              "startOffset": 0,
+              "endOffset": 480,
+              "content": "department of computer engineering undergraduate curriculum version 2020 t theoretical hours a applied hours cr credits ects ects credits total credits 260 total ects credits 260 total contact hours 168 total number of courses 54 first semester course code course name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "10",
+      "title": "Mezun Başarı Sıralaması Yönergesi",
+      "sections": [
+        {
+          "sectionId": "10.1",
+          "header": "Sıralama Esasları",
+          "chunks": [
+            {
+              "chunkId": "10.1.1",
+              "startOffset": 0,
+              "endOffset": 500,
+              "content": "marmara üni̇versi̇tesi̇ ön li̇sans ve li̇sans programlari mezun öğrenci̇leri̇ni̇n başari siralamasinin beli̇rlenmesi̇ne i̇li̇şki̇n yönerge senato 02102018 tarih ve 36910 bi̇ri̇nci̇ bölüm amaç kapsam dayanak ve tanımlar amaç madde 1 1 bu yönergenin amacı marmara üniversitesi ön lisans ve lisans programı öğrencileri"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "11",
+      "title": "Kütüphaneler Yönetmeliği",
+      "sections": [
+        {
+          "sectionId": "11.1",
+          "header": "Kütüphane Kuralları ve İşleyişi",
+          "chunks": [
+            {
+              "chunkId": "11.1.1",
+              "startOffset": 0,
+              "endOffset": 495,
+              "content": "marmara üni̇versi̇tesi̇ kütüphaneler yönetmeli̇ği̇ resmi gazete 29 kasım 1990 20701 amaç tanımlar kapsam madde 1 bu yönetmelik marmara üniversitesi bünyesinde bulunan merkez kütüphane ile fakülteler ve diğer birimler kütüphanelerinin tanımı görevi çalışma esaslarını belirlemek amacıyla düzenlenmiştir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "12",
+      "title": "Yaz Okulu Yönergesi (2025)",
+      "sections": [
+        {
+          "sectionId": "12.1",
+          "header": "Yaz Okulu Esasları",
+          "chunks": [
+            {
+              "chunkId": "12.1.1",
+              "startOffset": 0,
+              "endOffset": 485,
+              "content": "marmara üni̇versi̇tesi̇ yaz okulu yönergesi̇ senato 4 şubat 2025 4592 bi̇ri̇nci̇ bölüm amaç kapsam dayanak ve tanımlar amaç ve kapsam madde 1 1 bu yönergenin amacı marmara üniversitesi bünyesinde yaz aylarında uygulanacak olan eğitimöğretim programlarının usul ve esaslarını düzenlemektir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "13",
+      "title": "Mezuniyet Belgeleri Yönergesi",
+      "sections": [
+        {
+          "sectionId": "13.1",
+          "header": "Diploma ve Belge Esasları",
+          "chunks": [
+            {
+              "chunkId": "13.1.1",
+              "startOffset": 0,
+              "endOffset": 510,
+              "content": "marmara üni̇versi̇tesi̇ mezuni̇yet belgeleri̇ne i̇li̇şki̇n yönerge senato 12 ekim 2016 35111a 02 ekim 201836910 amaç madde 1 – 1 bu yönergenin amacı marmara üniversitesine bağlı programlardan ilgili mevzuat hükümlerine göre mezun olmaya hak kazananlara verilecek olan belgelerin hazırlanmasına"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "14",
+      "title": "Komisyon Üyeleri",
+      "sections": [
+        {
+          "sectionId": "14.1",
+          "header": "Bölüm Komisyonları",
+          "chunks": [
+            {
+              "chunkId": "14.1.1",
+              "startOffset": 0,
+              "endOffset": 480,
+              "content": "müdek ve sürekli i̇yileştirme komisyonu prof dr haluk topcuoğlu doç dr ömer korçak doç dr mustafa ağaoğlu dr öğr üyesi betül boz dr öğr üyesi sanem arslan yılmaz i̇ntibak komisyonu doç dr ali haydar özer başkan dr öğr üyesi fatma corut ergin dr öğr üyesi betül boz"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "15",
+      "title": "Engelli Öğrenci Birimi Yönergesi",
+      "sections": [
+        {
+          "sectionId": "15.1",
+          "header": "Engelli Öğrenci Hakları ve Sınavlar",
+          "chunks": [
+            {
+              "chunkId": "15.1.1",
+              "startOffset": 0,
+              "endOffset": 510,
+              "content": "marmara trxivnnsirnsi nncbrri ognnnci niniui yonnncnsi birinci biiliim genel hukumler madde lamag ve kapsam 1 bu ydnergenin amacr marmara universitesinde kayrth bulunan engelli clrencilerin engel durumlarmdan dolayr ders ve slnav uygulamalarrnda karqrlagtrklan sorunlan ortadan kaldrrarak"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "16",
+      "title": "Fakülte Kurulları",
+      "sections": [
+        {
+          "sectionId": "16.1",
+          "header": "Fakülte Yönetim Kurulu",
+          "chunks": [
+            {
+              "chunkId": "16.1.1",
+              "startOffset": 0,
+              "endOffset": 450,
+              "content": "fakülte kurulu prof dr bülent eki̇ci̇ dekan prof dr bülent eki̇ci̇ bölüm bşk prof dr ömer akgi̇ray bölüm bşk prof dr haluk r topçuoğlu bölüm bşk prof dr nihat alpagu sayar bölüm bşk prof dr atıf koca bölüm bşk prof dr cevat sarıoğlu bölüm bşk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "17",
+      "title": "Mazeret Sınavı Yönergesi",
+      "sections": [
+        {
+          "sectionId": "17.1",
+          "header": "Mazeret Halleri ve Başvuru",
+          "chunks": [
+            {
+              "chunkId": "17.1.1",
+              "startOffset": 0,
+              "endOffset": 490,
+              "content": "marmara üni̇versi̇tesi̇ mazeret sinavi yönergesi̇ senato 1 mart 2016 3446a 3 mayıs 2016 3463i̇ 12 ekim 2016 35110b 12 ekim 201635110 bi̇ri̇nci̇ bölüm amaç kapsam dayanak ve tanımlar amaç ve kapsam madde 1 1 bu yönerge marmara üniversitesine bağlı fakülte yüksekokul ve meslek yüksekokulu ve enstitülerde yapılacak olan mazeret sınavlarına"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "18",
+      "title": "Mezunlar Ofisi Yönergesi",
+      "sections": [
+        {
+          "sectionId": "18.1",
+          "header": "Mezunlar Ofisi ve Kariyer Merkezi",
+          "chunks": [
+            {
+              "chunkId": "18.1.1",
+              "startOffset": 0,
+              "endOffset": 495,
+              "content": "marmara universitesi mezuntar ofisi ve karyer merkezi yonergesi irinci btiliim genel hukumier madde 1 amag ve kapsam 1 bu yonerge marmara universitesi blinyesinde kurulan mezunlar ofisi ile karryer merkezinin gorevlerini yaptsrnt gagma usul ve esaslarrnr dijzenler"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "19",
+      "title": "Tezli ve Tezsiz Yüksek Lisans Geçiş Yönergesi",
+      "sections": [
+        {
+          "sectionId": "19.1",
+          "header": "Yüksek Lisans Geçiş Esasları",
+          "chunks": [
+            {
+              "chunkId": "19.1.1",
+              "startOffset": 0,
+              "endOffset": 487,
+              "content": "marmara üni̇versi̇tesi̇ tezli̇ ve tezsi̇z yüksek li̇sans programlari arasi geçi̇ş yönergesi̇ senato 18 mart 2014 3234b bi̇ri̇nci̇ bölüm amaç kapsam dayanak ve tanımlar amaç madde 1 – 1 bu yönergenin amacı marmara üniversitesi bünyesinde yer alan tezli ve tezsiz yüksek lisans programları arasında yapılacak geçişlere ilişkin usul ve esasları belirlemektir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "20",
+      "title": "Bilimsel Etkinliklere Katılım Yönergesi",
+      "sections": [
+        {
+          "sectionId": "20.1",
+          "header": "Etkinlik Katılım ve Destek",
+          "chunks": [
+            {
+              "chunkId": "20.1.1",
+              "startOffset": 0,
+              "endOffset": 492,
+              "content": "marmara univrnsirnsi ocnnncirrnin vunriqi ve yurtnrr nitiryrsrt nrrirvrixrrnn kattltm yonrcncnsi amac ie kapsam madde i 1 bu y6nerge marmara universitesi dsrencilerinin yurtigi ve yurtdrqrnda dtizenlenen bilimsel etkinliklere katrhm taleplerinin deerlendirilmesi ofrencilerin gegici srire ile g6revlendirmesi ve bu gergevede"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "21",
+      "title": "Yan Dal Programı Yönergesi",
+      "sections": [
+        {
+          "sectionId": "21.1",
+          "header": "Yan Dal Başvuru ve Kabul",
+          "chunks": [
+            {
+              "chunkId": "21.1.1",
+              "startOffset": 0,
+              "endOffset": 510,
+              "content": "marmara üni̇versi̇tesi̇ ön li̇sans ve li̇sans düzeyi̇ndeki̇ programlar arasindaki̇ yan dal programi yönergesi̇ senato 07 ocak 2025 45817 amaç madde 1 1 bu yönerge marmara üniversitesi bünyesinde yer alan ön lisans ve lisans düzeyindeki diploma programları arasında yapılacak yan dal programlarının uygulanması ile ilgili usul ve esasları düzenler"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "22",
+      "title": "Sürekli Eğitim Merkezi Yönergesi",
+      "sections": [
+        {
+          "sectionId": "22.1",
+          "header": "MÜSEM Faaliyetleri",
+          "chunks": [
+            {
+              "chunkId": "22.1.1",
+              "startOffset": 0,
+              "endOffset": 495,
+              "content": "marmara ünġversġtesġ süreklġ eğġtġm merkezġ eğġtġm ve sertġfġka programlari yönergesġ senato 5 nisan 2011 2892ġ bġrġncġ bölüm amaç kapsam dayanak ve tanımlar amaç ve kapsam madde 1 bu yönergenin amacı üniversitenin örgün lisans ve lisansüstü programları dıģında kamu kurumları ile özel ve uluslararası kuruluģ ve kiģilerin ihtiyacı olduğu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "23",
+      "title": "Muafiyet ve İntibak İşlemleri Yönergesi",
+      "sections": [
+        {
+          "sectionId": "23.1",
+          "header": "Ders Muafiyeti ve İntibak",
+          "chunks": [
+            {
+              "chunkId": "23.1.1",
+              "startOffset": 0,
+              "endOffset": 480,
+              "content": "marmara üni̇versi̇tesi̇ muafi̇yet ve i̇nti̇bak i̇şlemleri̇ yönergesi̇ senato 6 ağustos 2024 4532 amaç madde 1 1 bu yönergenin amacı marmara üniversitesine yeni kayıt yaptıran öğrencilerin daha önce marmara üniversitesi dâhil olmak üzere herhangi bir yükseköğretim kurumundan alıp başardığı derslerin muafiyet ve yarıyılyıl intibak esasları"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "24",
+      "title": "Özel Öğrenci Yönergesi",
+      "sections": [
+        {
+          "sectionId": "24.1",
+          "header": "Özel Öğrenci Statüsü",
+          "chunks": [
+            {
+              "chunkId": "24.1.1",
+              "startOffset": 0,
+              "endOffset": 515,
+              "content": "marmara üni̇versi̇tesi̇ özel öğrenci̇ yönergesi̇ senato 05 aralık 20234456 bi̇ri̇nci̇ bölüm amaç kapsam dayanak ve tanımlar madde 1 1 bu yönerge marmara üniversitesinde ön lisans lisans ve lisansüstü düzeylerde özel öğrenci statüsünde okumak isteyen öğrenciler ile marmara üniversitesi öğrencisi olup da diğer yükseköğretim kurumlarında özel öğrenci"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "25",
+      "title": "Çift Diploma Yönetmeliği",
+      "sections": [
+        {
+          "sectionId": "25.1",
+          "header": "Uluslararası Ortak Programlar",
+          "chunks": [
+            {
+              "chunkId": "25.1.1",
+              "startOffset": 0,
+              "endOffset": 520,
+              "content": "marmara ünġversġtesġ çġft dġplomaya yönelġk uluslararasi ortak programlar eğġtġm ve öğretġm yönetmelġğġ resmî gazete 17 temmuz 2009 27291 bġrġncġ bölüm amaç kapsam dayanak ve tanımlar amaç madde 1 – 1 bu yönetmeliğin amacı marmara üniversitesinin yurtdışındaki yükseköğretim kurumlarıyla birlikte önlisans lisans ve lisansüstü programlarında uluslararası"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "26",
+      "title": "Yaz Okulu Kaldırılma Yönetmeliği",
+      "sections": [
+        {
+          "sectionId": "26.1",
+          "header": "Yürürlükten Kaldırma",
+          "chunks": [
+            {
+              "chunkId": "26.1.1",
+              "startOffset": 0,
+              "endOffset": 361,
+              "content": "marmara üni̇versi̇tesi̇ yaz okulu yönetmeli̇ği̇ni̇n yürürlükten kaldirilmasina dai̇r yönetmeli̇k resmi gazete 29 haziran 2017 30109 madde 1 – 2462009 tarihli ve 27268 sayılı resmî gazete’de yayımlanan marmara üniversitesi yaz okulu yönetmeliği yürürlükten kaldırılmıştır madde 2 – bu yönetmelik yayımı tarihinde yürürlüğe girer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "27",
+      "title": "Sınav ve Başarı Değerlendirme Yönergesi",
+      "sections": [
+        {
+          "sectionId": "27.1",
+          "header": "Sınav Kuralları ve Değerlendirme",
+          "chunks": [
+            {
+              "chunkId": "27.1.1",
+              "startOffset": 0,
+              "endOffset": 505,
+              "content": "marmara üni̇versi̇tesi̇ sinav ve başari değerlendi̇rme yönergesi̇ senato 3 temmuz 2008 2629 12 ekim 2016 351 10 amaç ve kapsam madde 1 – 1 bu yönerge 24 ağustos 2008 tarihli ve 26977 sayılı resmi gazete’de yayımlanan marmara üniversitesi önlisans ve lisans eğitimöğretim ve sınav yönetmeliği ile 1 mart 2004 tarihli ve 25389 sayılı resmi gazete’de yayımlanan"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "28",
+      "title": "Çift Anadal Programı Yönergesi",
+      "sections": [
+        {
+          "sectionId": "28.1",
+          "header": "ÇAP Başvuru ve Esasları",
+          "chunks": [
+            {
+              "chunkId": "28.1.1",
+              "startOffset": 0,
+              "endOffset": 490,
+              "content": "marmara üni̇versi̇tesi̇ ön li̇sans ve li̇sans düzeyi̇ndeki̇ programlar arasindaki̇ çi̇ft anadal programi yönergesi̇ senato 07 ocak 2025 45816 amaç madde 1 1 bu yönerge marmara üniversitesi bünyesinde yer alan ön lisans ve lisans düzeyindeki diploma programları arasında yapılacak çift anadal programlarının uygulanması ile ilgili usul ve esasları düzenler"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "29",
+      "title": "Mühendislik Fakültesi Organizasyon Şeması",
+      "sections": [
+        {
+          "sectionId": "29.1",
+          "header": "İdari ve Akademik Teşkilat",
+          "chunks": [
+            {
+              "chunkId": "29.1.1",
+              "startOffset": 0,
+              "endOffset": 450,
+              "content": "marmara üniversitesi mühendislik fakültesi organizasyon şeması ocak 2020 1 üst yönetim 11 marmara üniversitesi rektörü 2 fakülte yönetimi 21 mühendislik fakültesi dekanı 22 fakülte yönetim kurulu 23 fakülte kurulu 3 dekan yardımcılıkları 31 dekan yardımcısı 32 dekan yardımcısı 4 fakülte i̇dari birimleri 41 fakülte sekreteri 5 bölüm başkanlıkları 51 bilgisayar mühendisliği bölüm başkanı 52 endüstri mühendisliği bölüm başkanı 53 çevre mühendisliği"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "30",
+      "title": "7417 Sayılı Af Kanunu Uygulama Esasları",
+      "sections": [
+        {
+          "sectionId": "30.1",
+          "header": "Öğrenci Affı ve Geri Dönüş Esasları",
+          "chunks": [
+            {
+              "chunkId": "30.1.1",
+              "startOffset": 0,
+              "endOffset": 490,
+              "content": "marmara üni̇versi̇tesi̇ 7417 sayili kanunla kabul edi̇len öğrenci̇ affi i̇le i̇lgi̇li̇ genel ön li̇sans li̇sans ve li̇sansüstü uygulama esaslari amaç kapsam ve dayanak madde 1 bu uygulama esasları 05072022 tarih ve 31887 sayılı resmî gazete’de yayımlanarak yürürlüğe giren 7417 sayılı devlet memurları kanunu ile bazı kanunlarda ve 375 sayılı kanun hükmünde kararnamede değişiklik yapılmasına dair kanun ile 2547 sayılı yükseköğretim kanunu’na eklenen geçici madde 83"
+            },
+            {
+              "chunkId": "30.1.2",
+              "startOffset": 400,
+              "endOffset": 910,
+              "content": "kanun ile 2547 sayılı yükseköğretim kanunu’na eklenen geçici madde 83 18072022 tarihli yükseköğretim genel kurulu ve 21092022 tarihli yükseköğretim yürütme kurulu toplantılarında belirlenen usul ve esaslara dayanılarak marmara üniversitesinde ilgili af süreçlerinin düzenlenmesi ve uygulanması amacıyla hazırlanmıştır madde 2 yükseköğretim kurumlarında hazırlık dâhil bütün sınıflarda intibak ön lisans lisans tamamlama lisans ve lisansüstü yüksek lisans doktora sanatta"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "31",
+      "title": "Kişisel Verileri Koruma Komisyonu Yönergesi",
+      "sections": [
+        {
+          "sectionId": "31.1",
+          "header": "KVKK Komisyonu Görev ve Yetkileri",
+          "chunks": [
+            {
+              "chunkId": "31.1.1",
+              "startOffset": 0,
+              "endOffset": 500,
+              "content": "marmara üni̇versi̇tesi̇ ki̇şi̇sel veri̇leri̇ koruma komi̇syonu yönergesi̇ senato 7 kasım 20234449 amaç madde 1 – 1 bu yönergenin amacı 7 nisan 2016 tarihli 29677 sayılı resmi gazete’de yayımlanan 6698 sayılı kişisel verilerin korunması kanunu’na kişisel verileri koruma kurumunun çıkardığı ve 28 ekim 2017 tarihli 30224 sayılı resmi gazete’de yayımlanan kişisel verilerin silinmesi yok edilmesi veya anonim hale getirilmesi hakkında yönetmelike uygun olarak kişisel verilerin korunması kanun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "32",
+      "title": "Mühendislik Fakültesi Staj Yönergesi",
+      "sections": [
+        {
+          "sectionId": "32.1",
+          "header": "Mühendislik Staj Esasları",
+          "chunks": [
+            {
+              "chunkId": "32.1.1",
+              "startOffset": 0,
+              "endOffset": 485,
+              "content": "marmara üni̇versi̇tesi̇ mühendi̇sli̇k fakültesi̇ öğrenci̇ staj yönergesi̇ senato 04122018 372 10 amaç ve kapsam madde 1 – 1 bu yönergenin amacı marmara üniversitesi mühendislik fakültesi öğrencilerinin öğrenim süresince yapmakla yükümlü oldukları staj çalışmalarının ilkelerini uygulama ve değerlendirme esaslarını belirlemektir 2 staj marmara üniversitesi mühendislik fakültesi öğrencisinin işletmelerde atölyelerde ve yükseköğretim kurumlarının laboratuvarlarında yapacağı çalışmaları kapsar"
+            },
+            {
+              "chunkId": "32.1.2",
+              "startOffset": 400,
+              "endOffset": 890,
+              "content": "yükseköğretim kurumlarının laboratuvarlarında yapacağı çalışmaları kapsar 3 staj yapan öğrenciler marmara üniversitesi rektörlüğü tarafından 5510 sayılı kanunun 5 maddesi b fıkrası uyarınca iş kazası ve meslek hastalıkları sigorta türü kapsamında sigortalanırlar sigorta işlemleri marmara üniversitesi mühendislik fakültesi dekanlığı tarafından yürütülür dayanak madde 2 – 1 bu yönerge marmara üniversitesi önlisans ve lisans eğitimöğretim ve sınav yönetmeliğinin 9 uncu maddesine dayanılarak"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "33",
+      "title": "Yabancı Dil Hazırlık Eğitim-Öğretim Yönergesi",
+      "sections": [
+        {
+          "sectionId": "33.1",
+          "header": "Hazırlık Sınıfı Kuralları ve Sınavlar",
+          "chunks": [
+            {
+              "chunkId": "33.1.1",
+              "startOffset": 0,
+              "endOffset": 510,
+              "content": "marmaraüni̇versi̇tesi̇ yabancidi̇l ve türkçe hazirlik siniflari eği̇ti̇möğreti̇m vesinavyönergesi̇ senato 1 eylül 2016 3492 bi̇ri̇nci̇ bölüm amaçkapsam dayanak ve tanımlar amaç madde1 1 bu yönergeninamacı marmara üniversitesi yabancı diller yüksekokulu tarafından yürütülenyabancı dil ve türkçe hazırlıksınıflarının eğitimöğretim ve sınavlarındauyulacakusul ve esasları düzenlemektir kapsam madde 2 —1 bu yönerge marmara üniversitesi yabancı dil ve türkçe hazırlık sınıflarında yürütülen eğitim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "34",
+      "title": "Yatay Geçiş Yönergesi",
+      "sections": [
+        {
+          "sectionId": "34.1",
+          "header": "Kurum İçi ve Kurumlar Arası Yatay Geçiş",
+          "chunks": [
+            {
+              "chunkId": "34.1.1",
+              "startOffset": 0,
+              "endOffset": 495,
+              "content": "marmara üni̇versi̇tesi̇ önli̇sans ve li̇sans programlari yatay geçi̇ş yönergesi̇ senato 3 haziran 2025 4641 bi̇ri̇nci̇ bölüm kapsam dayanak ve tanımlar amaç amaç madde 1 1 bu yönergenin amacı önlisans ve lisans düzeyindeki öğrencilerin marmara üniversitesindeki fakülte yüksekokul veya meslek yüksekokulu bünyesinde yer alan diploma programlarına kurum içi kurumlar arası yurt dışından yatay geçişe ilişkin usul ve esaslarını düzenlemektir kapsam madde 2 1 bu yönerge marmara üniversitesi ön"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "docId": "35",
+      "title": "Önlisans ve Lisans Eğitim-Öğretim Yönetmeliği",
+      "sections": [
+        {
+          "sectionId": "35.1",
+          "header": "Genel Eğitim-Öğretim ve Sınav Esasları",
+          "chunks": [
+            {
+              "chunkId": "35.1.1",
+              "startOffset": 0,
+              "endOffset": 505,
+              "content": "marmara üni̇versi̇tesi̇ önli̇sans ve li̇sans eği̇ti̇möğreti̇m ve sinav yönetmeli̇ği̇ resmî gazete 20 ağustos 2015 29451 08 ekim 2019 30912 27 ekim 2023 32352 bi̇ri̇nci̇ bölüm amaç kapsam dayanak ve tanımlar amaç ve kapsam madde 1 – 1 bu yönetmeliğin amacı ve kapsamı marmara üniversitesine bağlı fakülte yüksekokul ve meslek yüksekokullarının kayıt eğitimöğretim ve sınavlarında uyulacak esasları düzenlemektir dayanak madde 2 – 1 bu yönetmelik 4111981 tarihli ve 2547 sayılı yükseköğretim"
+            },
+            {
+              "chunkId": "35.1.2",
+              "startOffset": 450,
+              "endOffset": 950,
+              "content": "esasları düzenlemektir dayanak madde 2 – 1 bu yönetmelik 4111981 tarihli ve 2547 sayılı yükseköğretim kanununun 14 üncü ve 44 üncü maddelerine dayanılarak hazırlanmıştır tanımlar madde 3 – 1 bu yönetmelikte geçen a bağıl değerlendirme sistemi bds öğrencinin bir dersteki başarısının aynı derse kayıtlı diğer öğrencilerin başarı düzeylerine göre değerlendirilmesini b birim fakülte yüksekokul ve meslek yüksekokulunu c birim kurulu fakültelerde fakülte kurulunu yüksekokullarda yüksekokul kurulunu"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
