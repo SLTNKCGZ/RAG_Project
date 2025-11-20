@@ -1,0 +1,21 @@
+[33mbff08e6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Remove bin_backup from repo
+[33m03500cb[m Ignore bin_backup directory
+[33m97b8a32[m Retriever and Reranker modified.
+[33m087ca38[m Resolve merge conflicts
+[33me7a4417[m Test
+[33m1b089ba[m Retriever modified
+[33m9e03443[m Retriever and Reranker modified
+[33mb11752b[m add intent detection & query writer modules
+[33m828b128[m Cleanup merge conflicts: remove bin folder and class files
+[33me68772f[m Modified model
+[33mab89892[m Changed model
+[33m9ef09f1[m Modified model
+[33m4b06de0[m Added model
+[33m5750261[m New template created.
+[33mdaa9688[m Project cleaned.
+[33m7a78ca0[m New template created.
+[33md5d0b91[m Merge branch 'main' of https://github.com/beyzacoban/CSE3063F25Grp1
+[33mb502538[m New template created.
+[33me9b8923[m Template completed.
+[33m1a0f3cc[m Template created.
+[33md83f1f2[m Initial commit

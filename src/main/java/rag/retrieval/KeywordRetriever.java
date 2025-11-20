@@ -1,42 +1,43 @@
 package main.java.rag.retrieval;
 
-import main.java.rag.data.ChunkStore;
-import main.java.rag.model.Chunk;
-import main.java.rag.model.Hit;
+import rag.data.ChunksStore;
+import rag.model.Chunk;
+import rag.model.Hit;
 
 import java.util.*;
 
 public class KeywordRetriever implements Retriever {
 
-    private final int defaultTopK;
-
-    public KeywordRetriever() {
-        this.defaultTopK = 10;
-    }
+    private final int topK;  // constructor ile verilecek
 
     public KeywordRetriever(int topK) {
-        this.defaultTopK = topK;
+        this.topK = topK;
     }
 
     @Override
-    public List<Hit> retrieve(List<String> queryTerms, ChunkStore store, int topK) {
+    public List<Hit> retrieve(List<String> queryTerms, ChunksStore store) {
         if (queryTerms == null || queryTerms.isEmpty()) return Collections.emptyList();
-        int k = topK > 0 ? topK : defaultTopK;
 
         Map<String, Hit> hitMap = new HashMap<>();
 
         for (Chunk chunk : store.getAllChunks()) {
-            String textLower = chunk.getText() == null ? "" : chunk.getText().toLowerCase();
-            int tfSum = 0;
+            String chunkTextLower = safeLower(chunk.getText());
+            int totalTf = 0;
 
             for (String term : queryTerms) {
                 if (term == null || term.isEmpty()) continue;
-                tfSum += countOccurrences(textLower, term.toLowerCase());
+                totalTf += countOccurrences(chunkTextLower, term.toLowerCase());
             }
 
-            if (tfSum > 0) {
+            if (totalTf > 0) {
                 String key = chunk.getDocId() + "||" + chunk.getChunkId();
-                hitMap.put(key, new Hit(chunk.getDocId(), chunk.getChunkId(), tfSum));
+                Hit h = hitMap.get(key);
+                if (h == null) {
+                    h = new Hit(chunk.getDocId(), chunk.getChunkId(), totalTf);
+                    hitMap.put(key, h);
+                } else {
+                    h.setScore(h.getScore() + totalTf);
+                }
             }
         }
 
@@ -46,16 +47,25 @@ public class KeywordRetriever implements Retriever {
                 .thenComparing(Hit::getDocId)
                 .thenComparing(Hit::getChunkId));
 
-        return k > 0 && hits.size() > k ? hits.subList(0, k) : hits;
+        if (hits.size() > topK) {
+            return hits.subList(0, topK);
+        } else {
+            return hits;
+        }
     }
 
-    private int countOccurrences(String text, String term) {
+    private static int countOccurrences(String haystackLower, String needleLower) {
+        if (haystackLower == null || needleLower == null) return 0;
         int count = 0;
-        int idx = text.indexOf(term);
+        int idx = haystackLower.indexOf(needleLower);
         while (idx != -1) {
             count++;
-            idx = text.indexOf(term, idx + term.length());
+            idx = haystackLower.indexOf(needleLower, idx + needleLower.length());
         }
         return count;
+    }
+
+    private static String safeLower(String s) {
+        return s == null ? "" : s.toLowerCase();
     }
 }

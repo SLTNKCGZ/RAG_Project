@@ -8,17 +8,15 @@ import java.util.*;
 
 public class SimpleReranker implements Reranker {
 
-    private final int proximityWindow;  // karakter
+    private final int proximityWindow; // karakter
     private final int proximityBonus;
+    private final int titleBoost;
 
-    public SimpleReranker() {
-        this.proximityWindow = 15;
-        this.proximityBonus = 5;
-    }
-
-    public SimpleReranker(int proximityWindow, int proximityBonus) {
+    // Constructor zorunlu, default yok
+    public SimpleReranker(int proximityWindow, int proximityBonus, int titleBoost) {
         this.proximityWindow = proximityWindow;
         this.proximityBonus = proximityBonus;
+        this.titleBoost = titleBoost;
     }
 
     @Override
@@ -30,16 +28,32 @@ public class SimpleReranker implements Reranker {
             Chunk chunk = store.getChunk(hit.getDocId(), hit.getChunkId());
             if (chunk == null) continue;
 
-            int score = hit.getScore();
+            int score = hit.getScore() * 10; // tf_sum * 10
+
+            // proximity bonus: herhangi iki terim proximityWindow içinde ise ekle
             if (queryTerms != null && queryTerms.size() >= 2) {
                 if (anyTermsWithinWindow(chunk.getText().toLowerCase(), queryTerms, proximityWindow)) {
                     score += proximityBonus;
                 }
             }
 
+            // title boost: doc title veya section title herhangi bir query terimi içeriyorsa
+            String docTitle = store.getDocumentTitle(hit.getDocId());
+            if (docTitle != null) {
+                String titleLower = docTitle.toLowerCase();
+                for (String term : queryTerms) {
+                    if (term == null) continue;
+                    if (titleLower.contains(term.toLowerCase())) {
+                        score += titleBoost;
+                        break;
+                    }
+                }
+            }
+
             reranked.add(new Hit(hit.getDocId(), hit.getChunkId(), score));
         }
 
+        // stable sort: score desc, docId asc, chunkId asc
         reranked.sort(Comparator
                 .comparingInt(Hit::getScore).reversed()
                 .thenComparing(Hit::getDocId)
@@ -48,6 +62,7 @@ public class SimpleReranker implements Reranker {
         return reranked;
     }
 
+    // helper: herhangi iki terim proximityWindow içinde mi
     private boolean anyTermsWithinWindow(String text, List<String> terms, int window) {
         List<Integer> positions = new ArrayList<>();
         for (String term : terms) {
