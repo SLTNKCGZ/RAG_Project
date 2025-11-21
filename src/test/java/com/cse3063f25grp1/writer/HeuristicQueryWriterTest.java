@@ -19,7 +19,6 @@ class HeuristicQueryWriterTest {
 
         List<String> terms = writer.write("Öğrenci kayıt ve danışman seçimi için adımlar nelerdir?");
 
-        // stopwords: ve, için -> çıkmalı; punctuation ve büyük harfler temizlenmiş olmalı
         assertEquals(List.of("öğrenci", "kayıt", "danışman", "seçimi", "adımlar", "nelerdir"), terms);
     }
 

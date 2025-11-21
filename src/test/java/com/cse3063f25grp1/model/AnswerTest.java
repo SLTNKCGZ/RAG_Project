@@ -2,53 +2,39 @@ package com.cse3063f25grp1.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for {@link Answer} focused on how it will be used in the RAG pipeline:
- * - final answer text that explains a registration/policy question
- * - citations that point to specific document sections (docId:sectionId:start-end)
- * - single line formatting that will be printed by {@code Main}.
+ * Tests for {@link Answer} class - citation formatting for RAG pipeline.
  */
 class AnswerTest {
 
     @Test
-    void toSingleLine_keepsRegistrationAnswerText_whenNoCitationsPresent() {
-        // simulate a final answer for a registration FAQ
-        Answer answer = new Answer("Ders kaydı, akademik takvimde belirtilen kayıt haftasında yapılır.");
+    void toSingleLine_formatsAnswerWithCitations() {
+        // Test basic citation formatting using real CSE department data
+        Answer answer = new Answer("Erasmus koordinatörü Dr. Öğr. Üyesi Ali Haydar Özer'dir.");
+        answer.addCitation("erasmus_bilgileri.pdf:koordinator:5-15");
+        answer.addCitation("bolum_rehberi.pdf:uluslararasi_iliskiler:200-250");
 
-        assertEquals(
-                "Ders kaydı, akademik takvimde belirtilen kayıt haftasında yapılır.",
-                answer.toSingleLine());
+        assertEquals("Erasmus koordinatörü Dr. Öğr. Üyesi Ali Haydar Özer'dir. See: erasmus_bilgileri.pdf:koordinator:5-15, bolum_rehberi.pdf:uluslararasi_iliskiler:200-250",
+                    answer.toSingleLine());
     }
 
     @Test
-    void toSingleLine_appendsPolicyCitationsInChunkCitationFormat() {
-        // answer generated from two different chunks of policy documents
-        Answer answer = new Answer("Devamsızlık sınırı %70 devam zorunluluğudur.");
-        answer.addCitation("ogrenci_el_kitabi.pdf:attendance_rules:120-260");
-        answer.addCitation("yonerge_2024.pdf:madde_15:10-80");
+    void addCitation_and_hasCitations_workCorrectly() {
+        // Test citation management methods using CSE department staff data
+        Answer answer = new Answer("Fakülte sekreteri Buket Burcu Kambak'ın ofisi M1-307'dedir.");
 
-        assertEquals(
-                "Devamsızlık sınırı %70 devam zorunluluğudur. See: ogrenci_el_kitabi.pdf:attendance_rules:120-260, yonerge_2024.pdf:madde_15:10-80",
-                answer.toSingleLine());
-    }
+        // Initially no citations
+        assertEquals(false, answer.hasCitations());
 
-    @Test
-    void constructor_preservesGivenCitationsForCourseInfoScenario() {
-        // course information synthesized from multiple sections of the same document
-        List<String> citations = List.of(
-                "cse3063_syllabus.pdf:intro:0-120",
-                "cse3063_syllabus.pdf:grading:300-420");
+        // Add citation from administrative units document
+        answer.addCitation("idari_birimler.pdf:fakulte_sekreteri:1-10");
+        assertTrue(answer.hasCitations());
 
-        Answer answer = new Answer("CSE3063 dersinde proje bileşeni ve final sınavı bulunmaktadır.", citations);
-
-        assertEquals(
-                "CSE3063 dersinde proje bileşeni ve final sınavı bulunmaktadır. See: cse3063_syllabus.pdf:intro:0-120, cse3063_syllabus.pdf:grading:300-420",
-                answer.toSingleLine());
+        // Add another citation from department guide
+        answer.addCitation("bolum_rehberi.pdf:iletisim:50-80");
+        assertEquals(2, answer.getCitations().size());
     }
 }
-
-

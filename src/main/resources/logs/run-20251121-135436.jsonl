@@ -1,0 +1,5 @@
+{"stage":"detectIntent","inputs":"question=\"demo\"","outputsSummary":"intent=Unknown","timingMs":0}
+{"stage":"writeQuery","inputs":"question=\"demo\"","outputsSummary":"terms=1 terms","timingMs":17}
+{"stage":"retrieve","inputs":"terms=1 terms","outputsSummary":"hits=0 hits","timingMs":49}
+{"stage":"rerank","inputs":"hits=0 hits","outputsSummary":"rerankedHits=0 hits","timingMs":106}
+{"stage":"answer","inputs":"rerankedHits=0 hits","outputsSummary":"answerLength=34","timingMs":0}

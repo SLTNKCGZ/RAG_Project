@@ -20,7 +20,6 @@ class RuleIntentDetectorTest {
         rules.put(Intent.Registration, Arrays.asList("kayıt", "ders kaydı"));
         rules.put(Intent.Course, Arrays.asList("ders", "course"));
 
-        // Önce Course sonra Registration gelecek şekilde priority
         List<Intent> priority = Arrays.asList(Intent.Course, Intent.Registration);
 
         RuleIntentDetector detector = new RuleIntentDetector(rules, priority);
@@ -28,7 +27,6 @@ class RuleIntentDetectorTest {
         String question = "Ders kaydı nasıl yapılır?";
         Intent detected = detector.detect(question);
 
-        // Her iki intent için de anahtar kelime geçiyor, fakat priority'de Course önde
         assertSame(Intent.Course, detected);
     }
 

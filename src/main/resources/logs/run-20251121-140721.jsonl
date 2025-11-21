@@ -1,0 +1,5 @@
+{"stage":"detectIntent","inputs":"question=\"CSE3063 neye bağlıdır\"","outputsSummary":"intent=Unknown","timingMs":8}
+{"stage":"writeQuery","inputs":"question=\"CSE3063 neye bağlıdır\"","outputsSummary":"terms=3 terms","timingMs":16}
+{"stage":"retrieve","inputs":"terms=3 terms","outputsSummary":"hits=10 hits","timingMs":62}
+{"stage":"rerank","inputs":"hits=10 hits","outputsSummary":"rerankedHits=10 hits","timingMs":88}
+{"stage":"answer","inputs":"rerankedHits=10 hits","outputsSummary":"answerLength=156","timingMs":33}

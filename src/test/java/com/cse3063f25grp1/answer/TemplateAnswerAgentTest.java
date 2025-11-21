@@ -16,53 +16,49 @@ class TemplateAnswerAgentTest {
     @Test
     void selectsSentenceThatContainsAllQueryTerms() {
         ChunkStore store = new ChunkStore();
-        String text = "Kayıt haftası Eylül ayındadır. Öğrenci kayıt işlemleri öğrenci bilgi sistemi üzerinden yapılır. " +
-                "Danışman onayı gerekmektedir.";
-        Chunk chunk = new Chunk("doc1", "c1", text, "sec1", 0, text.length());
+        String text = "Erasmus koordinatörü Dr. Öğr. Üyesi Ali Haydar Özer'dir. E-posta adresi haydar.ozer@marmara.edu.tr'dir. " +
+                "Erasmus başvuruları bölüm koordinatörü üzerinden yapılır.";
+        Chunk chunk = new Chunk("erasmus.txt", "koordinator", text, "erasmus_bilgileri", 0, text.length());
         store.addChunk(chunk);
-        store.setDocumentTitle("doc1", "Kayıt Bilgileri");
+        store.setDocumentTitle("erasmus.txt", "Erasmus Bilgileri");
 
-        Hit hit = new Hit("doc1", "c1", 5);
+        Hit hit = new Hit("erasmus.txt", "koordinator", 5);
 
         TemplateAnswerAgent agent = new TemplateAnswerAgent();
         Answer answer = agent.answer(
-                List.of("öğrenci", "kayıt", "işlemleri"),
+                List.of("erasmus", "koordinatörü"),
                 List.of(hit),
                 store);
 
         String answerText = answer.getText();
-        String lower = answerText.toLowerCase();
 
-        // Cevap, kaynak açıklamasıyla başlamalı
-        assertTrue(answerText.startsWith("Bu cevap \"Kayıt Bilgileri\" başlıklı belgenin sec1 bölümünden alınmıştır."));
-        // Seçilen cümle, tüm query terimlerini içermeli
-        assertTrue(lower.contains("öğrenci"));
-        assertTrue(lower.contains("kayıt"));
-        assertTrue(lower.contains("işlemleri"));
+        assertTrue(answerText.startsWith("Bu cevap \"Erasmus Bilgileri\" başlıklı belgenin erasmus_bilgileri bölümünden alınmıştır."));
+        assertTrue(answerText.toLowerCase().contains("erasmus"));
+        assertTrue(answerText.toLowerCase().contains("koordinatörü"));
     }
 
     @Test
     void formatsCitationsFromTopHits() {
         ChunkStore store = new ChunkStore();
-        Chunk c1 = new Chunk("doc1", "c1", "metin1", "sec1", 0, 10);
-        Chunk c2 = new Chunk("doc2", "c2", "metin2", "sec2", 11, 30);
+        Chunk c1 = new Chunk("idari_birimler.txt", "fakulte_sekreteri", "Fakülte sekreteri Buket Burcu Kambak'tır.", "idari_birimler", 0, 50);
+        Chunk c2 = new Chunk("komisyonlar.txt", "erasmus_komisyonu", "Erasmus komisyonu öğrenci değişim programlarını yönetir.", "komisyonlar", 100, 150);
         store.addChunk(c1);
         store.addChunk(c2);
 
-        Hit h1 = new Hit("doc1", "c1", 3);
-        Hit h2 = new Hit("doc2", "c2", 2);
+        Hit h1 = new Hit("idari_birimler.txt", "fakulte_sekreteri", 3);
+        Hit h2 = new Hit("komisyonlar.txt", "erasmus_komisyonu", 2);
 
         TemplateAnswerAgent agent = new TemplateAnswerAgent();
         Answer answer = agent.answer(
-                List.of("metin"),
+                List.of("sekreter"),
                 List.of(h1, h2),
                 store);
 
         List<String> citations = answer.getCitations();
 
         assertEquals(2, citations.size());
-        assertEquals("doc1:sec1:0-10", citations.get(0));
-        assertEquals("doc2:sec2:11-30", citations.get(1));
+        assertEquals("idari_birimler.txt:idari_birimler:0-50", citations.get(0));
+        assertEquals("komisyonlar.txt:komisyonlar:100-150", citations.get(1));
     }
 }
 
