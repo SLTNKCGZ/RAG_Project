@@ -9,14 +9,11 @@ intent_priority:
 keyword_rules:
   REGISTRATION:
     - "kayıt"
-    - "registration"
     - "transkript"
-    - "not"
     - "şube"
   
   STAFF_LOOKUP:
     - "ofis"
-    - "office" 
     - "numara"
     - "e-posta"
     - "profesör"
@@ -26,18 +23,14 @@ keyword_rules:
     - "ders"
     - "course"
     - "kredi"
-    - "credit"
     - "ön koşul"
-    - "prerequisite"
     - "not"
     - "başarı"
     - "geçme"
     - "harf"
-    
+
   
   POLICY_FAQ:
     - "politika"
-    - "policy"
     - "kural"
-    - "regulation"
     - "yönetmelik"

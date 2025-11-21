@@ -1,12 +1,14 @@
 package com.cse3063f25grp1.writer;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import com.cse3063f25grp1.model.Intent;
 
 class HeuristicQueryWriterTest {
 
@@ -15,21 +17,31 @@ class HeuristicQueryWriterTest {
         Set<String> stopwords = new HashSet<>();
         stopwords.add("ve");
         stopwords.add("için");
-        HeuristicQueryWriter writer = new HeuristicQueryWriter(stopwords);
+        HeuristicQueryWriter writer = new HeuristicQueryWriter(stopwords, Map.of());
 
-        List<String> terms = writer.write("Öğrenci kayıt ve danışman seçimi için adımlar nelerdir?");
+        List<String> terms = writer.write(
+                "Öğrenci kayıt ve danışman seçimi için adımlar nelerdir?",
+                Intent.Registration);
 
-        // stopwords: ve, için -> çıkmalı; punctuation ve büyük harfler temizlenmiş olmalı
         assertEquals(List.of("öğrenci", "kayıt", "danışman", "seçimi", "adımlar", "nelerdir"), terms);
     }
 
     @Test
     void returnsEmptyListForNullOrEmptyQuestion() {
-        HeuristicQueryWriter writer = new HeuristicQueryWriter(Set.of());
+        HeuristicQueryWriter writer = new HeuristicQueryWriter(Set.of(), Map.of());
 
-        assertEquals(List.of(), writer.write(null));
-        assertEquals(List.of(), writer.write(""));
+        assertEquals(List.of(), writer.write(null, Intent.Unknown));
+        assertEquals(List.of(), writer.write("", Intent.Unknown));
+    }
+
+    @Test
+    void appendsStaffLookupBoosters() {
+        HeuristicQueryWriter writer = new HeuristicQueryWriter(
+                Set.of("bilgisi"),
+                Map.of(Intent.StaffLookup, List.of("staff", "advisor", "office")));
+
+        List<String> terms = writer.write("Danışman bilgisi lazım", Intent.StaffLookup);
+
+        assertEquals(List.of("danışman", "lazım", "staff", "advisor", "office"), terms);
     }
 }
-
-

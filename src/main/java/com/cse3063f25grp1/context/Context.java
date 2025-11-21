@@ -1,6 +1,8 @@
 package com.cse3063f25grp1.context;
 
 import java.util.List;
+import java.util.Map;
+
 import com.cse3063f25grp1.data.ChunkStore;
 import com.cse3063f25grp1.model.Answer;
 import com.cse3063f25grp1.model.Hit;
@@ -11,6 +13,7 @@ public class Context {
     private Query question;
     private ChunkStore chunkStore;
     private Intent intent;
+    private Map<Intent, List<String>> intentKeywordRules;
     private List<String> terms;
     private List<Hit> retrievedHits;
     private List<Hit> rerankedHits;
@@ -41,6 +44,14 @@ public class Context {
 
     public void setIntent(Intent intent) {
         this.intent = intent;
+    }
+
+    public Map<Intent, List<String>> getIntentKeywordRules() {
+        return intentKeywordRules;
+    }
+
+    public void setIntentKeywordRules(Map<Intent, List<String>> intentKeywordRules) {
+        this.intentKeywordRules = intentKeywordRules;
     }
 
     public List<String> getTerms() {

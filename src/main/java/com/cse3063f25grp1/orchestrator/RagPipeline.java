@@ -60,6 +60,7 @@ public abstract class RagPipeline {
                 Map<Intent, List<String>> rules = rulesLoader.loadRules(config.getRulesFilePath());
                 List<Intent> priorityOrder = new java.util.ArrayList<>(rules.keySet());
                 intentDetector = new RuleIntentDetector(rules, priorityOrder);
+                context.setIntentKeywordRules(rules);
             } else {
                 throw new IllegalArgumentException("Unknown intent detector type: " + config.getIntentType());
             }
@@ -85,13 +86,17 @@ public abstract class RagPipeline {
         try {
             if (config.getWriterType().equals("HeuristicQueryWriter")) {
                 Set<String> stopwords = loadStopwords(config.getStopwordsFilePath());
-                inputs = "stopwords=" + stopwords.size() + " stopwords";
-                queryWriter = new HeuristicQueryWriter(stopwords);
+                inputs = "stopwords=" + stopwords.size() + " stopwords" + stopwords.toString();
+                Map<Intent, List<String>> boosters = context.getIntentKeywordRules();
+                if (boosters == null) {
+                    boosters = Map.of();
+                }
+                queryWriter = new HeuristicQueryWriter(stopwords, boosters);
             } else {
                 throw new IllegalArgumentException("Unknown query writer type: " + config.getWriterType());
             }
 
-            List<String> terms = queryWriter.write(question);
+            List<String> terms = queryWriter.write(question, context.getIntent());
             context.setTerms(terms);
             outputsSummary = "Number of terms: "+ terms.size()+" Terms:"+terms.toString();
         } catch (Exception e) {
@@ -106,7 +111,7 @@ public abstract class RagPipeline {
     protected void retrieve() {
         long startTime = System.currentTimeMillis();
         List<String> terms = context.getTerms();
-        String inputs = terms.toString();
+        String inputs = "Size of terms "+terms.size()+" Terms: "+terms.toString();
         String outputsSummary = "";
         String error = null;
 
@@ -133,7 +138,7 @@ public abstract class RagPipeline {
         long startTime = System.currentTimeMillis();
         List<String> terms = context.getTerms();
         List<Hit> hits = context.getRetrievedHits();
-        String inputs = hits.toString();
+        String inputs = "Size of retrivedHits:"+ hits.size()+" Hits: "+hits.toString();
         String outputsSummary = "";
         String error = null;
 
@@ -152,7 +157,7 @@ public abstract class RagPipeline {
 
             List<Hit> rerankedHits = reranker.rerank(terms, hits, chunkStore);
             context.setRerankedHits(rerankedHits);
-            outputsSummary = rerankedHits.toString();
+            outputsSummary = "Size of rerankedHits:"+rerankedHits.size()+" hits: "+rerankedHits.toString();
         } catch (Exception e) {
             error = e.getMessage();
             throw e;
