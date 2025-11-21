@@ -3,6 +3,7 @@ package com.cse3063f25grp1.config;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,15 +32,19 @@ public class ConfigLoader {
             String stopwordsFile = configMap.get("params.query_writer.stopwords_file");
             int topN = Integer.parseInt(configMap.get("params.query_writer.top_n"));
 
-            String documentsDir = configMap.get("paths.documents_dir");
             String chunkStore = configMap.get("paths.chunk_store");
             String logsDir = configMap.get("paths.logs_dir");
 
-            // Convert relative paths to absolute paths based on config file location
-            Path baseDir = configPath.getParent().getParent(); // Go up from resources to main
+            Path baseDir = configPath.getParent();
+            if (baseDir == null) {
+                baseDir = configPath.toAbsolutePath().getParent();
+            }
+            if (baseDir == null) {
+                baseDir = configPath.toAbsolutePath();
+            }
+
             Path rulesFilePath = resolvePath(baseDir, rulesFile);
             Path stopwordsFilePath = resolvePath(baseDir, stopwordsFile);
-            Path documentsDirPath = resolvePath(baseDir, documentsDir);
             Path chunkPath = resolvePath(baseDir, chunkStore);
             Path logsDirPath = resolvePath(baseDir, logsDir);
 
@@ -53,7 +58,6 @@ public class ConfigLoader {
                     topK,
                     stopwordsFilePath,
                     topN,
-                    documentsDirPath,
                     chunkPath,
                     logsDirPath);
         } catch (IOException e) {
@@ -62,66 +66,51 @@ public class ConfigLoader {
     }
 
     private Map<String, String> parseYaml(List<String> lines) {
-        Map<String, String> configMap = new HashMap<>();
-        String currentSection = "";
-        String currentSubSection = "";
+    Map<String, String> map = new HashMap<>();
+    String section = null;
+    String subsection = null;
 
-        for (String line : lines) {
-            if (line.trim().isEmpty() || line.trim().startsWith("#")) {
-                continue;
+    for (String line : lines) {
+        if (line.trim().isEmpty() || line.trim().startsWith("#"))
+            continue;
+
+        int indent = getIndentLevel(line);
+        String content = line.trim();
+
+        if (content.endsWith(":")) {
+            String name = content.substring(0, content.length() - 1);
+
+            if (indent == 0) {
+                section = name;
+                subsection = null;
+            } else if (indent == 2) {
+                subsection = section + "." + name;
+            }
+        } else if (content.contains(":")) {
+            String[] parts = content.split(":", 2);
+            String key = parts[0].trim();
+            String value = parts[1].trim();
+
+            // remove quotes
+            if (value.startsWith("\"") && value.endsWith("\""))
+                value = value.substring(1, value.length() - 1);
+
+            String fullKey;
+            if (indent == 4 && subsection != null) {
+                fullKey = subsection + "." + key;
+            } else if (indent == 2 && section != null) {
+                fullKey = section + "." + key;
+            } else {
+                fullKey = key;
             }
 
-            int indentLevel = getIndentLevel(line);
-            String content = line.trim();
-
-            if (content.endsWith(":")) {
-                // Section header
-                String section = content.substring(0, content.length() - 1);
-                if (indentLevel == 0) {
-                    // Top-level section
-                    currentSection = section;
-                    currentSubSection = "";
-                } else if (indentLevel == 2) {
-                    // Sub-section under params
-                    if (currentSection.equals("params")) {
-                        currentSubSection = currentSection + "." + section;
-                    } else {
-                        currentSubSection = currentSection + "." + section;
-                    }
-                }
-            } else if (content.contains(":")) {
-                // Key-value pair
-                String[] parts = content.split(":", 2);
-                String key = parts[0].trim();
-                String value = parts[1].trim();
-
-                // Remove quotes if present
-                if (value.startsWith("\"") && value.endsWith("\"")) {
-                    value = value.substring(1, value.length() - 1);
-                }
-
-                // Build full key path
-                String fullKey;
-                if (indentLevel == 2 && !currentSubSection.isEmpty()) {
-                    // Nested value (e.g., params.intent.rules_file)
-                    fullKey = currentSubSection + "." + key;
-                } else if (indentLevel == 2) {
-                    // Direct value under section (e.g., pipeline.intent_detector)
-                    fullKey = currentSection + "." + key;
-                } else if (indentLevel == 0) {
-                    // Top-level value (shouldn't happen in our YAML, but handle it)
-                    fullKey = key;
-                } else {
-                    // Default: use current section
-                    fullKey = currentSection.isEmpty() ? key : currentSection + "." + key;
-                }
-
-                configMap.put(fullKey, value);
-            }
+            map.put(fullKey, value);
         }
-
-        return configMap;
     }
+    
+    return map;
+}
+
 
     private int getIndentLevel(String line) {
         int count = 0;
@@ -136,6 +125,15 @@ public class ConfigLoader {
     }
 
     private Path resolvePath(Path baseDir, String relativePath) {
+        if (relativePath == null || relativePath.isEmpty()) {
+            return null;
+        }
+
+        Path candidate = Paths.get(relativePath);
+        if (candidate.isAbsolute()) {
+            return candidate.normalize();
+        }
+
         // Remove leading "./" if present
         if (relativePath.startsWith("./")) {
             relativePath = relativePath.substring(2);

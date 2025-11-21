@@ -1,13 +1,19 @@
 package com.cse3063f25grp1.retrieval;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.cse3063f25grp1.data.ChunkStore;
 import com.cse3063f25grp1.model.Chunk;
 import com.cse3063f25grp1.model.Hit;
 
 public class KeywordRetriever implements Retriever {
 
-    private final int topK; // constructor ile verilecek
+    private final int topK;
 
     public KeywordRetriever(int topK) {
         this.topK = topK;

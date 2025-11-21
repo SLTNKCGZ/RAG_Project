@@ -12,6 +12,7 @@ public class RagOrchestrator {
     public RagOrchestrator(Context context) {
         this.context = context;
         this.traceBus = new TraceBus();
+        System.out.println("RagOrchestrator created.");
     }
 
     public void run(Config config, String question) {

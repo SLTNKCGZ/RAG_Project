@@ -17,7 +17,7 @@ public class Config {
 
     public Config(String intentType, String writerType, String retrieverType, String reranker,
             String answerAgentType, Path rulesFilePath, int topK, Path stopwordsFilePath,
-            int topN, Path documentsDirPath, Path chunkPath, Path logsDirPath) {
+            int topN, Path chunkPath, Path logsDirPath) {
         this.intentType = intentType;
         this.writerType = writerType;
         this.retrieverType = retrieverType;

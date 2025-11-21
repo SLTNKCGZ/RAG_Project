@@ -9,10 +9,10 @@ params:
   intent:
     rules_file: "./intent_rules.yaml"
   retriever:
-    top_k: 10
+    top_k: "10"
   query_writer:
     stopwords_file: "./stopwords.yaml"
-    top_n: 8
+    top_n: "8"
 
 paths:
   chunk_store: "../java/com/cse3063f25grp1/data/chunks.json"

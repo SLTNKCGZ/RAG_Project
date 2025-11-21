@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
 import com.cse3063f25grp1.model.Chunk;
 
 public class ChunkLoader {
@@ -14,6 +15,7 @@ public class ChunkLoader {
             String jsonContent = String.join("\n", lines);
 
             ChunkStore chunkStore = new ChunkStore();
+            
             parseJsonAndLoadChunks(jsonContent, chunkStore);
 
             return chunkStore;
