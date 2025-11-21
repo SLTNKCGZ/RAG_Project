@@ -1,5 +1,0 @@
-{"stage":"detectIntent","inputs":"question=\"Serap Korkmaz\"","outputsSummary":"intent=Unknown","timingMs":0}
-{"stage":"writeQuery","inputs":"question=\"Serap Korkmaz\"","outputsSummary":"terms=2 terms","timingMs":0}
-{"stage":"retrieve","inputs":"terms=2 terms","outputsSummary":"hits=6 hits","timingMs":31}
-{"stage":"rerank","inputs":"hits=6 hits","outputsSummary":"rerankedHits=6 hits","timingMs":84}
-{"stage":"answer","inputs":"rerankedHits=6 hits","outputsSummary":"answerLength=122","timingMs":11}

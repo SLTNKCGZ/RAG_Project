@@ -1,5 +1,0 @@
-{"stage":"detectIntent","inputs":"question=\"Hangi harfli başarı notları başarısız notlardır?\"","outputsSummary":"intent=Registration","timingMs":4}
-{"stage":"writeQuery","inputs":"question=\"Hangi harfli başarı notları başarısız notlardır?\"","outputsSummary":"terms=6 terms","timingMs":7}
-{"stage":"retrieve","inputs":"terms=6 terms","outputsSummary":"hits=3 hits","timingMs":1}
-{"stage":"rerank","inputs":"hits=3 hits","outputsSummary":"rerankedHits=3 hits","timingMs":16}
-{"stage":"answer","inputs":"rerankedHits=3 hits","outputsSummary":"answerLength=404","timingMs":0}

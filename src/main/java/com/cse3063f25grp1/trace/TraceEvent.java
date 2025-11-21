@@ -51,9 +51,6 @@ public class TraceEvent {
         return error != null;
     }
 
-    /**
-     * Convert to JSON string for JSONL format.
-     */
     public String toJson() {
         StringBuilder json = new StringBuilder();
         json.append("{");

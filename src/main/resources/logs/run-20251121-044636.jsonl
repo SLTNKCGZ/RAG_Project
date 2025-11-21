@@ -1,5 +1,0 @@
-{"stage":"detectIntent","inputs":"question=\"CSE3063 dersinin kredisi kaçtır?\"","outputsSummary":"intent=Course","timingMs":0}
-{"stage":"writeQuery","inputs":"question=\"CSE3063 dersinin kredisi kaçtır?\"","outputsSummary":"terms=4 terms","timingMs":8}
-{"stage":"retrieve","inputs":"terms=4 terms","outputsSummary":"hits=10 hits","timingMs":31}
-{"stage":"rerank","inputs":"hits=10 hits","outputsSummary":"rerankedHits=10 hits","timingMs":111}
-{"stage":"answer","inputs":"rerankedHits=10 hits","outputsSummary":"answerLength=329","timingMs":15}

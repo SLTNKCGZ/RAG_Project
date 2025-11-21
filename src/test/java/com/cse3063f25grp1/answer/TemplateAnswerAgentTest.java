@@ -1,15 +1,15 @@
 package com.cse3063f25grp1.answer;
 
-import com.cse3063f25grp1.data.ChunkStore;
-import com.cse3063f25grp1.model.Answer;
-import com.cse3063f25grp1.model.Chunk;
-import com.cse3063f25grp1.model.Hit;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import com.cse3063f25grp1.data.ChunkStore;
+import com.cse3063f25grp1.model.Answer;
+import com.cse3063f25grp1.model.Chunk;
+import com.cse3063f25grp1.model.Hit;
 
 class TemplateAnswerAgentTest {
 

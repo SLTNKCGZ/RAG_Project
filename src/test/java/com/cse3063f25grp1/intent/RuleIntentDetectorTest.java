@@ -1,8 +1,5 @@
 package com.cse3063f25grp1.intent;
 
-import com.cse3063f25grp1.model.Intent;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,6 +8,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import org.junit.jupiter.api.Test;
+
+import com.cse3063f25grp1.model.Intent;
 
 class RuleIntentDetectorTest {
 

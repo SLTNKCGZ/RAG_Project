@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import com.cse3063f25grp1.answer.AnswerAgent;
 import com.cse3063f25grp1.answer.TemplateAnswerAgent;
 import com.cse3063f25grp1.config.Config;
@@ -77,13 +78,14 @@ public abstract class RagPipeline {
     protected void writeQuery() {
         long startTime = System.currentTimeMillis();
         String question = context.getQuestion().getText();
-        String inputs = "question=\"" + question + "\"";
+        String inputs = "";
         String outputsSummary = "";
         String error = null;
 
         try {
             if (config.getWriterType().equals("HeuristicQueryWriter")) {
                 Set<String> stopwords = loadStopwords(config.getStopwordsFilePath());
+                inputs = "stopwords=" + stopwords.size() + " stopwords";
                 queryWriter = new HeuristicQueryWriter(stopwords);
             } else {
                 throw new IllegalArgumentException("Unknown query writer type: " + config.getWriterType());
@@ -91,7 +93,7 @@ public abstract class RagPipeline {
 
             List<String> terms = queryWriter.write(question);
             context.setTerms(terms);
-            outputsSummary = "terms=" + terms.size() + " terms";
+            outputsSummary = "Number of terms: "+ terms.size()+" Terms:"+terms.toString();
         } catch (Exception e) {
             error = e.getMessage();
             throw e;
@@ -104,7 +106,7 @@ public abstract class RagPipeline {
     protected void retrieve() {
         long startTime = System.currentTimeMillis();
         List<String> terms = context.getTerms();
-        String inputs = "terms=" + (terms != null ? terms.size() : 0) + " terms";
+        String inputs = terms.toString();
         String outputsSummary = "";
         String error = null;
 
@@ -117,7 +119,7 @@ public abstract class RagPipeline {
 
             List<Hit> hits = retriever.retrieve(terms, context.getChunkStore());
             context.setRetrievedHits(hits);
-            outputsSummary = "hits=" + (hits != null ? hits.size() : 0) + " hits";
+            outputsSummary = "Number of hits: "+ hits.size()+" retrievedHits: "+hits.toString();
         } catch (Exception e) {
             error = e.getMessage();
             throw e;
@@ -131,7 +133,7 @@ public abstract class RagPipeline {
         long startTime = System.currentTimeMillis();
         List<String> terms = context.getTerms();
         List<Hit> hits = context.getRetrievedHits();
-        String inputs = "hits=" + (hits != null ? hits.size() : 0) + " hits";
+        String inputs = hits.toString();
         String outputsSummary = "";
         String error = null;
 
@@ -150,7 +152,7 @@ public abstract class RagPipeline {
 
             List<Hit> rerankedHits = reranker.rerank(terms, hits, chunkStore);
             context.setRerankedHits(rerankedHits);
-            outputsSummary = "rerankedHits=" + (rerankedHits != null ? rerankedHits.size() : 0) + " hits";
+            outputsSummary = rerankedHits.toString();
         } catch (Exception e) {
             error = e.getMessage();
             throw e;
@@ -163,7 +165,7 @@ public abstract class RagPipeline {
     protected void answer() {
         long startTime = System.currentTimeMillis();
         List<Hit> rerankedHits = context.getRerankedHits();
-        String inputs = "rerankedHits=" + (rerankedHits != null ? rerankedHits.size() : 0) + " hits";
+        String inputs ="Number of hits: "+ rerankedHits.size() +" rerankedHits:"+rerankedHits.toString();
         String outputsSummary = "";
         String error = null;
 
@@ -178,8 +180,7 @@ public abstract class RagPipeline {
             List<String> queryTerms = context.getTerms();
             Answer answer = answerAgent.answer(queryTerms, rerankedHits, context.getChunkStore());
             context.setFinalAnswer(answer);
-            outputsSummary = "answerLength="
-                    + (answer != null && answer.getText() != null ? answer.getText().length() : 0);
+            outputsSummary = "Answer: "+answer.toString();
         } catch (Exception e) {
             error = e.getMessage();
             throw e;

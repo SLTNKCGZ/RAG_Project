@@ -1,12 +1,12 @@
 package com.cse3063f25grp1.answer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.cse3063f25grp1.data.ChunkStore;
 import com.cse3063f25grp1.model.Answer;
 import com.cse3063f25grp1.model.Chunk;
 import com.cse3063f25grp1.model.Hit;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class TemplateAnswerAgent implements AnswerAgent {
@@ -130,9 +130,6 @@ public class TemplateAnswerAgent implements AnswerAgent {
         return bestSentence;
     }
 
-    /**
-     * Count how many query terms appear in sentence
-     */
     private int countQueryTerms(String sentence, List<String> queryTerms) {
         if (queryTerms == null)
             return 0;
@@ -149,9 +146,7 @@ public class TemplateAnswerAgent implements AnswerAgent {
         return count;
     }
 
-    /**
-     * Format citation as: docId:sectionId:startOffset-endOffset
-     */
+
     private String formatCitation(Chunk chunk) {
         return String.format("%s:%s:%d-%d",
                 chunk.getDocId(),

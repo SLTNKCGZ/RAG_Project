@@ -61,7 +61,7 @@ public class KeywordRetriever implements Retriever {
         }
     }
 
-    private static int countOccurrences(String haystackLower, String needleLower) {
+    private int countOccurrences(String haystackLower, String needleLower) {
         if (haystackLower == null || needleLower == null)
             return 0;
         int count = 0;
@@ -73,7 +73,7 @@ public class KeywordRetriever implements Retriever {
         return count;
     }
 
-    private static String safeLower(String s) {
+    private String safeLower(String s) {
         return s == null ? "" : s.toLowerCase();
     }
 

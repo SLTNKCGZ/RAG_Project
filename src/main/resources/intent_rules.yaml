@@ -29,6 +29,11 @@ keyword_rules:
     - "credit"
     - "ön koşul"
     - "prerequisite"
+    - "not"
+    - "başarı"
+    - "geçme"
+    - "harf"
+    
   
   POLICY_FAQ:
     - "politika"
