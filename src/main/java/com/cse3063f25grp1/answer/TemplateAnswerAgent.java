@@ -30,8 +30,21 @@ public class TemplateAnswerAgent implements AnswerAgent {
         // Select best sentence from chunk
         String bestSentence = selectBestSentence(bestChunk.getText(), queryTerms);
 
-        // Format answer
-        String answerText = "Cevabınız: " + bestSentence;
+        // Build a short source description for the main answer text
+        String docTitle = chunkStore.getDocumentTitle(bestChunk.getDocId());
+        String sourceDescription;
+        if (docTitle != null && !docTitle.isEmpty()) {
+            sourceDescription = String.format("Bu cevap \"%s\" başlıklı belgenin %s bölümünden alınmıştır. ",
+                    docTitle,
+                    bestChunk.getSectionId());
+        } else {
+            sourceDescription = String.format("Bu cevap %s belgesinin %s bölümünden alınmıştır. ",
+                    bestChunk.getDocId(),
+                    bestChunk.getSectionId());
+        }
+
+        // Format answer (include both explanation and source)
+        String answerText = sourceDescription + "Cevabınız: " + bestSentence;
 
         // Generate citations
         List<String> citations = new ArrayList<>();
@@ -48,26 +61,32 @@ public class TemplateAnswerAgent implements AnswerAgent {
         return answer;
     }
 
-    /**
-     * Select the best sentence from chunk text
-     * Choose sentence with most query terms, or first sentence
-     */
+   
     private String selectBestSentence(String text, List<String> queryTerms) {
         if (text == null || text.isEmpty()) {
             return "Bilgi bulunamadı.";
         }
 
-        // Split into sentences
         String[] sentences = text.split("[.!?]+");
-
         if (sentences.length == 0) {
             return text.substring(0, Math.min(200, text.length()));
         }
 
         String bestSentence = sentences[0].trim();
-        int maxTermCount = 0;
+        int bestTermCount = 0;
+        boolean bestContainsAll = false;
+        int bestLength = bestSentence.length();
 
-        // Find sentence with most query terms
+        // Normalize query terms
+        List<String> normalizedTerms = new ArrayList<>();
+        if (queryTerms != null) {
+            for (String term : queryTerms) {
+                if (term != null && !term.trim().isEmpty()) {
+                    normalizedTerms.add(term.toLowerCase());
+                }
+            }
+        }
+
         for (String sentence : sentences) {
             sentence = sentence.trim();
             if (sentence.isEmpty())
@@ -75,9 +94,36 @@ public class TemplateAnswerAgent implements AnswerAgent {
 
             int termCount = countQueryTerms(sentence, queryTerms);
 
-            if (termCount > maxTermCount) {
-                maxTermCount = termCount;
-                bestSentence = sentence;
+            boolean containsAll = false;
+            if (!normalizedTerms.isEmpty()) {
+                String lowerSentence = sentence.toLowerCase();
+                containsAll = true;
+                for (String term : normalizedTerms) {
+                    if (!lowerSentence.contains(term)) {
+                        containsAll = false;
+                        break;
+                    }
+                }
+            }
+
+            int length = sentence.length();
+
+            if (containsAll) {
+                if (!bestContainsAll
+                        || termCount > bestTermCount
+                        || (termCount == bestTermCount && length < bestLength)) {
+                    bestContainsAll = true;
+                    bestTermCount = termCount;
+                    bestLength = length;
+                    bestSentence = sentence;
+                }
+            } else if (!bestContainsAll) {
+                if (termCount > bestTermCount
+                        || (termCount == bestTermCount && length < bestLength)) {
+                    bestTermCount = termCount;
+                    bestLength = length;
+                    bestSentence = sentence;
+                }
             }
         }
 
