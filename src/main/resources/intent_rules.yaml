@@ -28,6 +28,7 @@ keyword_rules:
     - "başarı"
     - "geçme"
     - "harf"
+    - "bağlı"
 
   
   POLICY_FAQ:
