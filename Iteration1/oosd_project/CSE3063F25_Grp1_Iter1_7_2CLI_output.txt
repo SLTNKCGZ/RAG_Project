@@ -1,0 +1,7 @@
+java -jar rag.jar --config config.yaml --q "Hangi harfli başarı notları başarısız notlardır?"
+
+Answer: Bu cevap "mu_yonerge_basari_degerlendirme_2023_v3_03.01.2023" başlıklı belgenin 21.1 bölümünden alınmıştır. Cevabınız: -i?yi orta-i?yi cc 2,00 orta orta başarısız dc 1,50 orta-geçer başarısız başarısız dd 1,00 geçer başarısız başarısız fd 0,50 başarısız başarısız başarısız ff 0,00 başarısız başarısız başarısız yarıyıl sonu sınavına yarıyıl sonu sınavına yarıyıl sonu sınavına fg 0,00 girmedi (başarısız) girmedi (başarısız) girmedi (başarısız) dz 0,00 devamsız (başarısız) devamsız (başarısız) devamsız (başarısız) mz -- mazeretli mazeretli mazeretli s 0,00 yeterli (başarılı) yeterli (başarılı) yeterli (başarılı) u See: 21:21.1:25116-25615, 14:14.1:10690-11183, 21:21.1:24291-24787
+
+java -jar rag.jar --config config.yaml --q "Summer practice kaç gündür"      
+
+Answer: Bu cevap "staj" başlıklı belgenin 29.139 bölümünden alınmıştır. Cevabınız: c) toplam birikimli staj gün sayısı en az 60 olan öğrencilerin transkriptine cse3000 summer practice i ve cse4000 summer practice ii dersleri işlenir See: 29:29.139:0-154, 24:24.7:0-327, 24:24.9:0-423
