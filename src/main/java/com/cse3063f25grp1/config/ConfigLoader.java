@@ -19,6 +19,12 @@ public class ConfigLoader {
             List<String> lines = Files.readAllLines(configPath);
             Map<String, String> configMap = parseYaml(lines);
 
+            // Debug: Print all parsed keys (can be removed later)
+            System.err.println("Parsed config keys:");
+            for (String key : configMap.keySet()) {
+                System.err.println("  " + key + " = " + configMap.get(key));
+            }
+
             // Extract values from the parsed map
             String intentType = configMap.get("pipeline.intent_detector");
             String writerType = configMap.get("pipeline.query_writer");
@@ -27,19 +33,45 @@ public class ConfigLoader {
             String answerAgentType = configMap.get("pipeline.answer_agent");
 
             String rulesFile = configMap.get("params.intent.rules_file");
-            int topK = Integer.parseInt(configMap.get("params.retriever.top_k"));
+            String topKStr = configMap.get("params.retriever.top_k");
+            if (topKStr == null) {
+                throw new RuntimeException("Config dosyasında 'params.retriever.top_k' bulunamadı");
+            }
+            int topK = Integer.parseInt(topKStr);
+            
             String stopwordsFile = configMap.get("params.query_writer.stopwords_file");
-            int topN = Integer.parseInt(configMap.get("params.query_writer.top_n"));
+            String topNStr = configMap.get("params.query_writer.top_n");
+            if (topNStr == null) {
+                throw new RuntimeException("Config dosyasında 'params.query_writer.top_n' bulunamadı");
+            }
+            int topN = Integer.parseInt(topNStr);
 
             String documentsDir = configMap.get("paths.documents_dir");
             String chunkStore = configMap.get("paths.chunk_store");
             String logsDir = configMap.get("paths.logs_dir");
 
+            // Null kontrolleri
+            if (rulesFile == null) {
+                throw new RuntimeException("Config dosyasında 'params.intent.rules_file' bulunamadı");
+            }
+            if (stopwordsFile == null) {
+                throw new RuntimeException("Config dosyasında 'params.query_writer.stopwords_file' bulunamadı");
+            }
+            if (chunkStore == null) {
+                throw new RuntimeException("Config dosyasında 'paths.chunk_store' bulunamadı");
+            }
+            if (logsDir == null) {
+                throw new RuntimeException("Config dosyasında 'paths.logs_dir' bulunamadı");
+            }
+
             // Convert relative paths to absolute paths based on config file location
-            Path baseDir = configPath.getParent().getParent(); // Go up from resources to main
+            Path baseDir = configPath.getParent();
+            if (baseDir == null) {
+                baseDir = configPath.getFileSystem().getPath(".");
+            }
             Path rulesFilePath = resolvePath(baseDir, rulesFile);
             Path stopwordsFilePath = resolvePath(baseDir, stopwordsFile);
-            Path documentsDirPath = resolvePath(baseDir, documentsDir);
+            Path documentsDirPath = documentsDir != null ? resolvePath(baseDir, documentsDir) : null;
             Path chunkPath = resolvePath(baseDir, chunkStore);
             Path logsDirPath = resolvePath(baseDir, logsDir);
 
@@ -102,7 +134,10 @@ public class ConfigLoader {
 
                 // Build full key path
                 String fullKey;
-                if (indentLevel == 2 && !currentSubSection.isEmpty()) {
+                if (indentLevel >= 4 && !currentSubSection.isEmpty()) {
+                    // Deeply nested value (e.g., params.retriever.top_k)
+                    fullKey = currentSubSection + "." + key;
+                } else if (indentLevel == 2 && !currentSubSection.isEmpty()) {
                     // Nested value (e.g., params.intent.rules_file)
                     fullKey = currentSubSection + "." + key;
                 } else if (indentLevel == 2) {
@@ -112,8 +147,12 @@ public class ConfigLoader {
                     // Top-level value (shouldn't happen in our YAML, but handle it)
                     fullKey = key;
                 } else {
-                    // Default: use current section
-                    fullKey = currentSection.isEmpty() ? key : currentSection + "." + key;
+                    // Default: use current section or subsection
+                    if (!currentSubSection.isEmpty()) {
+                        fullKey = currentSubSection + "." + key;
+                    } else {
+                        fullKey = currentSection.isEmpty() ? key : currentSection + "." + key;
+                    }
                 }
 
                 configMap.put(fullKey, value);

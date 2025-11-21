@@ -15,5 +15,5 @@ params:
     top_n: 8
 
 paths:
-  chunk_store: "oosd_project/src/main/java/com/cse3063f25grp1data/chunks.json"
+  chunk_store: "../java/com/cse3063f25grp1/data/chunks.json"
   logs_dir: "./logs"
