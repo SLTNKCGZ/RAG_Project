@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: com.cse3063f25grp1.Main
-
