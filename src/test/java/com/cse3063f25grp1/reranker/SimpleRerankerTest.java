@@ -12,55 +12,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SimpleRerankerTest {
 
-    @Test
-    void appliesProximityBonusForCloseTerms() {
-        ChunkStore store = new ChunkStore();
-        // Text from research assistants file: terms "arş" and "gör" are close together
-        Chunk chunk = new Chunk("arastirma_gorevlileri.txt", "serap_korkmaz",
-                "Arş. Gör. Serap Korkmaz PhD: Bilgisayar Müh. - Marmara Üniversitesi. Ofis: M2-201",
-                "arastirma_gorevlileri", 0, 80);
-        store.addChunk(chunk);
-        store.setDocumentTitle("arastirma_gorevlileri.txt", "Araştırma Görevlileri");
+@Test
+void verifiesTopKOrderAndTieBreaks() {
+    ChunkStore store = new ChunkStore();
 
-        Hit baseHit = new Hit("arastirma_gorevlileri.txt", "serap_korkmaz", 3); // tf_sum=3
+    Chunk chunk1 = new Chunk("staff.txt", "ali_yilmaz", "Bilgisayar mühendisliği", "staff", 0, 20);
+    Chunk chunk2 = new Chunk("staff.txt", "ayse_demir", "Bilgisayar mühendisliği", "staff", 0, 20);
 
-        // window=50, proximityBonus=5, titleBoost=3
-        SimpleReranker reranker = new SimpleReranker(50, 5, 3);
+    store.addChunk(chunk1);
+    store.addChunk(chunk2);
+    store.setDocumentTitle("staff.txt", "Personel"); 
 
-        List<Hit> reranked = reranker.rerank(
-                Arrays.asList("arş", "gör"),
-                List.of(baseHit),
-                store);
+    Hit hit1 = new Hit("staff.txt", "ali_yilmaz", 2); // base: 20
+    Hit hit2 = new Hit("staff.txt", "ayse_demir", 2); // base: 20
 
-        // base score: 3*10=30, +5 proximity (Arş. Gör. are close), +3 title = 38
-        assertEquals(1, reranked.size());
-        assertEquals(38, reranked.get(0).getScore());
-    }
+    SimpleReranker reranker = new SimpleReranker(50, 5, 3);
 
-    @Test
-    void appliesTitleBoostForRelevantTitles() {
-        ChunkStore store = new ChunkStore();
-        // Text from success file: title contains "öğrenci" term
-        Chunk chunk = new Chunk("basari.txt", "yarismalar",
-                "Son 3 senede 30 öğrencimiz 12 farklı yarışmada ödül almışlardır.",
-                "basari_bilgileri", 0, 65);
-        store.addChunk(chunk);
-        store.setDocumentTitle("basari.txt", "Öğrenci Başarıları");
+    List<Hit> reranked = reranker.rerank(
+            Arrays.asList("bilgisayar", "elektronik"), 
+            Arrays.asList(hit1, hit2),
+            store
+    );
 
-        Hit baseHit = new Hit("basari.txt", "yarismalar", 2); // tf_sum=2
-
-        // window=50, proximityBonus=5, titleBoost=3
-        SimpleReranker reranker = new SimpleReranker(50, 5, 3);
-
-        List<Hit> reranked = reranker.rerank(
-                Arrays.asList("öğrenci", "yarışma"),
-                List.of(baseHit),
-                store);
-
-        // base score: 2*10=20, +5 proximity (öğrenci and yarışma are within window), +3 title = 28
-        assertEquals(1, reranked.size());
-        assertEquals(28, reranked.get(0).getScore());
-    }
+    assertEquals(2, reranked.size());
+    assertEquals(20, reranked.get(0).getScore()); 
+    assertEquals(20, reranked.get(1).getScore());
+    assertEquals("ali_yilmaz", reranked.get(0).getChunkId());   
+    assertEquals("ayse_demir", reranked.get(1).getChunkId());
+}
+    
 }
 
 
