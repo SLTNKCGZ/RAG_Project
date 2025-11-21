@@ -10,6 +10,7 @@ import com.cse3063f25grp1.context.Context;
 import com.cse3063f25grp1.data.ChunkLoader;
 import com.cse3063f25grp1.data.ChunkStore;
 import com.cse3063f25grp1.model.Query;
+import com.cse3063f25grp1.model.Answer;
 import com.cse3063f25grp1.orchestrator.RagOrchestrator;
 
 public class Main {
@@ -55,7 +56,14 @@ public class Main {
         RagOrchestrator orchestrator = new RagOrchestrator(context);
         context.setQuestion(question);
         orchestrator.run(config,context.getQuestion().getText());
-        System.out.println("Answer: " + context.getFinalAnswer().getText());
+
+        // Print answer including citations in a single line
+        Answer finalAnswer = context.getFinalAnswer();
+        if (finalAnswer != null) {
+            System.out.println("Answer: " + finalAnswer.toSingleLine());
+        } else {
+            System.out.println("Answer: (no answer generated)");
+        }
     }
 
     /**

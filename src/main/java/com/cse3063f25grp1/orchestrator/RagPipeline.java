@@ -174,7 +174,9 @@ public abstract class RagPipeline {
                 throw new IllegalArgumentException("Unknown answer agent type: " + config.getAnswerAgentType());
             }
 
-            Answer answer = new Answer("Answer not implemented yet");
+            // Use the configured AnswerAgent to generate a real answer
+            List<String> queryTerms = context.getTerms();
+            Answer answer = answerAgent.answer(queryTerms, rerankedHits, context.getChunkStore());
             context.setFinalAnswer(answer);
             outputsSummary = "answerLength="
                     + (answer != null && answer.getText() != null ? answer.getText().length() : 0);
