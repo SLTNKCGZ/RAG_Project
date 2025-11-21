@@ -27,7 +27,7 @@ We used the following tools for project management and task tracking:
 
 
 ## Commands
-
+In oosd_project directory:
 ```bash
 # Compile Java files
 javac -d out -cp "src" src/main/java/com/cse3063f25grp1/Main.java \
@@ -122,3 +122,4 @@ CSE3063F25Grp1/Iteration1/oosd_project
 ├── pom.xml                                  # Maven configuration
 └── README.md                                
 ```
+
