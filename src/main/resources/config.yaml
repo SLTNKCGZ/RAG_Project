@@ -1,0 +1,19 @@
+pipeline:
+  intent_detector: "RuleIntentDetector"
+  query_writer: "HeuristicQueryWriter" 
+  retriever: "KeywordRetriever"
+  reranker: "SimpleReranker"
+  answer_agent: "TemplateAnswerAgent"
+
+params:
+  intent:
+    rules_file: "./intent_rules.yaml"
+  retriever:
+    top_k: 10
+  query_writer:
+    stopwords_file: "./stopwords.yaml"
+    top_n: 8
+
+paths:
+  chunk_store: "oosd_project/src/main/java/com/cse3063f25grp1data/chunks.json"
+  logs_dir: "./logs"
