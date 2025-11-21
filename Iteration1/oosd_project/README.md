@@ -1,4 +1,4 @@
-# CSE3063F25Grp1 - RAG System Iteration 1
+# CSE3063F25Grp1 - Iteration 1
 
 ## Group Members
 
@@ -13,6 +13,18 @@
 ## Project Description
 
 This project is the first iteration of a Retrieval-Augmented Generation (RAG) system developed for the Object Oriented Software Design term project. The system retrieves relevant text chunks from a knowledge base based on user queries to generate answers.
+
+
+## Project Management
+
+We used the following tools for project management and task tracking:
+
+- **Trello Board**: For overall project planning and task management  
+  [Trello Board](https://trello.com/b/GdlThLqq/termproject)
+
+- **GitHub Projects**: For code-related task tracking and issue management  
+  [GitHub Project](https://github.com/users/beyzacoban/projects/1)
+
 
 ## Commands
 
@@ -40,13 +52,15 @@ java -jar rag.jar --config config.yaml --q "questions"
 
 ### Example Run
 ```bash
-java -jar rag.jar --config config.yaml --q "Murat Can Ganiz’in ofis numarası nedir?"
+java -jar rag.jar --config config.yaml --q "Murat Can Ganiz'in ofis numarası nedir?"
 ```
+
+
 
 ## Directory Layout
 
 ```
-CSE3063F25Grp1/Iteration1/
+CSE3063F25Grp1/Iteration1/oosd_project
 ├── src/
 │   ├── main/
 │   │   ├── java/com/cse3063f25grp1/
@@ -108,19 +122,3 @@ CSE3063F25Grp1/Iteration1/
 ├── pom.xml                                  # Maven configuration
 └── README.md                                
 ```
-
-## Log Files
-
-The system logs all operations in JSON Lines format. Sample log file:
-
-```json
-{"stage":"detectIntent","inputs":"question=\"CSE3063 neye bağlıdır\"","outputsSummary":"intent=Unknown","timingMs":4}
-{"stage":"writeQuery","inputs":"question=\"CSE3063 neye bağlıdır\"","outputsSummary":"terms=3 terms","timingMs":8}
-{"stage":"retrieve","inputs":"terms=3 terms","outputsSummary":"hits=10 hits","timingMs":24}
-{"stage":"rerank","inputs":"hits=10 hits","outputsSummary":"rerankedHits=10 hits","timingMs":47}
-{"stage":"answer","inputs":"rerankedHits=10 hits","outputsSummary":"answerLength=377","timingMs":16}
-```
-
----
-
-
