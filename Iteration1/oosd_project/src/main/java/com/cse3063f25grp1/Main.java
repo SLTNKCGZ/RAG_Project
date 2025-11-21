@@ -20,7 +20,7 @@ public class Main {
         String configPath = null;
         String query = null;
 
-        // Basit argüman parser
+       
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "--config":
@@ -49,7 +49,6 @@ public class Main {
         Query question = new Query(query);
         Context context = new Context();
         ChunkLoader chunkLoader = new ChunkLoader();
-        System.out.println("chunk "+config.getChunkPath());
         ChunkStore chunkStore = chunkLoader.loadChunks(config.getChunkPath());
         
         context.setChunkStore(chunkStore);
