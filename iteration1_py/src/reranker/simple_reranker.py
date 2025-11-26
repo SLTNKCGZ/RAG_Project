@@ -1,9 +1,9 @@
 from typing import List
 import collections 
-from reranker_abstract import Reranker
-from data.chunk_store import ChunkStore
-from model.chunk import Chunk
-from model.hit import Hit 
+from src.reranker.reranker_abstract import Reranker
+from src.data.chunk_store import ChunkStore
+from src.model.chunk import Chunk
+from src.model.hit import Hit 
 
 class SimpleReranker(Reranker):
     

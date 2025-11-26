@@ -7,5 +7,4 @@ class IntentDetectorAbstract(ABC):
    
     @abstractmethod
     def detect(self, question: str) -> Intent:
-        
         pass

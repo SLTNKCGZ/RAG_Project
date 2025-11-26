@@ -1,6 +1,6 @@
 import yaml
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict
 
 from src.config.config import Config
 
@@ -12,67 +12,35 @@ class ConfigLoader:
     """
     
     def __init__(self, config_path: Path):
-        """
-        Initialize ConfigLoader.
-        
-        Args:
-            config_path: Path to the config.yaml file
-        """
-        self.config_path = Path(config_path)
+        self.__config_path = Path(config_path)
     
     def load_config(self) -> Config:
-        """
-        Load and parse configuration from YAML file.
-        
-        Returns:
-            Config object with parsed settings
-            
-        Raises:
-            FileNotFoundError: If config file doesn't exist
-            ValueError: If config is malformed
-        """
-        if not self.config_path.exists():
-            raise FileNotFoundError(f"Config file not found: {self.config_path}")
         
         try:
-            with open(self.config_path, 'r', encoding='utf-8') as f:
-                config_data = yaml.safe_load(f)
-            
-            if not config_data:
-                raise ValueError("Config file is empty")
-            
-            # Extract pipeline configuration
-            pipeline = config_data.get('pipeline', {})
-            intent_type = pipeline.get('intent_detector', 'RuleIntentDetector')
-            writer_type = pipeline.get('query_writer', 'HeuristicQueryWriter')
-            retriever_type = pipeline.get('retriever', 'KeywordRetriever')
-            reranker_type = pipeline.get('reranker', 'SimpleReranker')
-            answer_agent_type = pipeline.get('answer_agent', 'TemplateAnswerAgent')
-            
-            # Extract parameters
-            params = config_data.get('params', {})
-            
-            intent_params = params.get('intent', {})
-            rules_file = intent_params.get('rules_file', 'resources/intent_rules.yaml')
-            
-            retriever_params = params.get('retriever', {})
-            top_k = retriever_params.get('top_k', 5)
-            
-            writer_params = params.get('query_writer', {})
-            stopwords_file = writer_params.get('stopwords_file', 'resources/stopwords.yaml')
-            top_n = writer_params.get('top_n', 3)
-            
-            # Extract paths
-            paths = config_data.get('paths', {})
-            chunk_store = paths.get('chunk_store', 'data/chunks.json')
-            logs_dir = paths.get('logs_dir', 'logs')
-            
-            # Resolve paths relative to config file directory
-            base_dir = self.config_path.parent
-            rules_file_path = self._resolve_path(base_dir, rules_file)
-            stopwords_file_path = self._resolve_path(base_dir, stopwords_file)
+            lines = self.__config_path.read_text(encoding="utf-8").splitlines()
+            config_map = self.__parse_yaml(lines)
+
+            # Extract values
+            intent_type = config_map.get("pipeline.intent_detector")
+            writer_type = config_map.get("pipeline.query_writer")
+            retriever_type = config_map.get("pipeline.retriever")
+            reranker_type = config_map.get("pipeline.reranker")
+            answer_agent_type = config_map.get("pipeline.answer_agent")
+
+            rules_file = config_map.get("params.intent.rules_file")
+            top_k = int(config_map.get("params.retriever.top_k"))
+            stopwords_file = config_map.get("params.query_writer.stopwords_file")
+            top_n = int(config_map.get("params.query_writer.top_n"))
+
+            chunk_store = config_map.get("paths.chunk_store")
+            logs_dir = config_map.get("paths.logs_dir")
+
+            base_dir = self._config_path.parent or self._config_path.resolve().parent
+
+            rules_path = self._resolve_path(base_dir, rules_file)
+            stopwords_path = self._resolve_path(base_dir, stopwords_file)
             chunk_path = self._resolve_path(base_dir, chunk_store)
-            logs_dir_path = self._resolve_path(base_dir, logs_dir)
+            logs_path = self._resolve_path(base_dir, logs_dir)
             
             return Config(
                 intent_type=intent_type,
@@ -88,27 +56,81 @@ class ConfigLoader:
                 logs_dir_path=logs_dir_path
             )
         
-        except yaml.YAMLError as e:
-            raise ValueError(f"Failed to parse YAML config: {e}")
+        
         except Exception as e:
             raise RuntimeError(f"Failed to load configuration from {self.config_path}: {e}")
     
-    @staticmethod
-    def _resolve_path(base_dir: Path, relative_path: str) -> Path:
-        """
-        Resolve a path relative to base directory.
-        If path is absolute, return as-is.
-        
-        Args:
-            base_dir: Base directory for relative paths
-            relative_path: Path to resolve
-            
-        Returns:
-            Resolved absolute Path
-        """
-        path = Path(relative_path)
-        
-        if path.is_absolute():
-            return path
-        
-        return (base_dir / path).resolve()
+
+    # ---------------------------
+    # PRIVATE METHODS (Java: private)
+    # ---------------------------
+    def __parse_yaml(self, lines: List[str]) -> Dict[str, str]:
+        map_data: Dict[str, str] = {}
+        section = None
+        subsection = None
+
+        for line in lines:
+            if line.strip() == "" or line.strip().startswith("#"):
+                continue
+
+            indent = self.__get_indent_level(line)
+            content = line.strip()
+
+            # Section or subsection
+            if content.endswith(":") and not ":" in content[:-1]:
+                name = content[:-1]
+
+                if indent == 0:
+                    section = name
+                    subsection = None
+                elif indent == 2 and section is not None:
+                    subsection = f"{section}.{name}"
+
+                continue
+
+            # Key-value
+            if ":" in content:
+                key, value = content.split(":", 1)
+                key = key.strip()
+                value = value.strip().strip('"')
+
+                if indent == 4 and subsection:
+                    full_key = f"{subsection}.{key}"
+                elif indent == 2 and section:
+                    full_key = f"{section}.{key}"
+                else:
+                    full_key = key
+
+                map_data[full_key] = value
+
+        return map_data
+
+    def __get_indent_level(self, line: str) -> int:
+        count = 0
+        for c in line:
+            if c == " ":
+                count += 1
+            else:
+                break
+        return count
+
+    def __resolve_path(self, base_dir: Path, raw: Optional[str]) -> Path:
+        if not raw:
+            raise ValueError("Raw path is None")
+
+        raw_path = Path(raw)
+
+        if raw_path.is_absolute():
+            return raw_path.resolve()
+
+        # Clean "./"
+        if raw.startswith("./"):
+            raw = raw[2:]
+
+        # Resolve "../"
+        resolved = base_dir
+        while raw.startswith("../"):
+            resolved = resolved.parent
+            raw = raw[3:]
+
+        return (resolved / raw).resolve()

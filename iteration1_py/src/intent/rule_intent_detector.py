@@ -4,18 +4,16 @@ from data.chunk_store import ChunkStore
 from intent_detector_abstract import IntentDetector
 
 
-class RuleIntentDetector(IntentDetector):
+class RuleIntentDetector(IntentDetectorAbstract):
   
 
-    def __init__(
-        self,
-        rules: Dict[Intent, List[str]],
-        priority_order: List[Intent]
+    def __init__(self, rules: Dict[Intent, List[str]], priority_order: List[Intent]
     ) -> None:
     
-        self.rules: Dict[Intent, List[str]] = rules
-        self.priority_order: List[Intent] = priority_order
-
+        self._rules: Dict[Intent, List[str]] = rules
+        self._priority_order: List[Intent] = priority_order
+    
+    
     def detect(self, question: str) -> Intent:
       
         if question is None or question.strip() == "":
