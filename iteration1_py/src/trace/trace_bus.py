@@ -6,19 +6,15 @@ from src.trace.trace_event import TraceEvent
 class TraceBus:
     
     def __init__(self):
-       
-        self.sinks: List[TraceSinkAbstract] = []
+        self.__sinks: List[TraceSinkAbstract] = []
     
     def register(self, sink: TraceSinkAbstract) -> None:
-       
-        self.sinks.append(sink)
+        self.__sinks.append(sink)
     
     def unregister(self, sink: TraceSinkAbstract) -> None:
-       
-        if sink in self.sinks:
-            self.sinks.remove(sink)
+        if sink in self.__sinks:
+            self.__sinks.remove(sink)
     
     def publish(self, event: TraceEvent) -> None:
-        
-        for sink in self.sinks:
+        for sink in self.__sinks:
             sink.record(event)

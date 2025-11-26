@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional
+from typing import List
 import collections 
 from reranker_abstract import Reranker
 from data.chunk_store import ChunkStore
@@ -6,17 +6,13 @@ from model.chunk import Chunk
 from model.hit import Hit 
 
 class SimpleReranker(Reranker):
-    """
-    Baseline Reranker implementation using simple heuristics: 
-    TF score boost, Proximity Bonus, and Title Boost.
-    """
-
+    
     def __init__(self, proximity_window: int, proximity_bonus: int, title_boost: int):
-        self.proximity_window = proximity_window 
-        self.proximity_bonus = proximity_bonus
-        self.title_boost = title_boost
+        self.__proximity_window = proximity_window 
+        self.__proximity_bonus = proximity_bonus
+        self.__title_boost = title_boost
 
-    def _any_terms_within_window(self, text: str, terms: List[str], window: int) -> bool:
+    def __any_terms_within_window(self, text: str, terms: List[str], window: int) -> bool:
         positions: List[int] = []
         
         for term in terms:
@@ -48,7 +44,7 @@ class SimpleReranker(Reranker):
         reranked: List[Hit] = []
 
         for hit in hits:
-            chunk: Optional[Chunk] = store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
+            chunk: Chunk = store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
             
             if chunk is None:
                 continue
@@ -58,10 +54,10 @@ class SimpleReranker(Reranker):
 
                 chunk_text_lower = chunk.get_text().lower()
                 
-                if self._any_terms_within_window(chunk_text_lower, queryTerms, self.proximity_window):
-                    score += self.proximity_bonus
+                if self._any_terms_within_window(chunk_text_lower, queryTerms, self.__proximity_window):
+                    score += self.__proximity_bonus
 
-            doc_title: Optional[str] = store.get_document_title(hit.get_doc_id())
+            doc_title: str = store.get_document_title(hit.get_doc_id())
             
             if doc_title:
                
@@ -73,7 +69,7 @@ class SimpleReranker(Reranker):
                         continue
                         
                     if term.lower() in title_lower:
-                        score += self.title_boost
+                        score += self.__title_boost
                         break 
             reranked.append(Hit(hit.get_doc_id(), hit.get_chunk_id(), score))
 

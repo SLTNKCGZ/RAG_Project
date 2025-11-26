@@ -8,12 +8,12 @@ from retriever_abstract import Retriever
 class KeywordRetriever(Retriever):
 
     def __init__(self, top_k: int):
-        self.top_k = top_k
+        self.__top_k = top_k
 
-    def _safe_lower(self, s: str) -> str:
+    def __safe_lower(self, s: str) -> str:
         return s.lower() if s is not None else ""
 
-    def _count_occurrences(self, haystack_lower: str, needle_lower: str) -> int:
+    def __count_occurrences(self, haystack_lower: str, needle_lower: str) -> int:
         if not haystack_lower or not needle_lower:
             return 0
         return haystack_lower.count(needle_lower)
@@ -25,13 +25,13 @@ class KeywordRetriever(Retriever):
         hit_map: Dict[str, object] = {}
 
         for chunk in store.get_all_chunks():
-            chunk_text_lower = self._safe_lower(chunk.get_text())
+            chunk_text_lower = self.__safe_lower(chunk.get_text())
             total_tf = 0
 
             for term in query_terms:
                 if not term:
                     continue
-                total_tf += self._count_occurrences(chunk_text_lower, term.lower())
+                total_tf += self.__count_occurrences(chunk_text_lower, term.lower())
 
             if total_tf > 0:
                 key = f"{chunk.get_doc_id()}||{chunk.get_chunk_id()}"
@@ -51,4 +51,4 @@ class KeywordRetriever(Retriever):
             h.get_chunk_id()
         ))
         
-        return hits[:self.top_k]
+        return hits[:self.__top_k]

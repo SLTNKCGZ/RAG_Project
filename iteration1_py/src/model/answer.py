@@ -1,43 +1,36 @@
 from typing import List
 
-
 class Answer:
-   
-    def __init__(self, text: str = None, citations: List[str] = None):
-       
-        self.text = text
-        self.citations = citations if citations is not None else []
     
+    def __init__(self, text: str, citations: List[str]):
+        self.__text: str = text
+        self.__citations: List[str] = list(citations)
+
     def get_text(self) -> str:
-        return self.text
+        return self.__text
     
     def set_text(self, text: str) -> None:
-        """Set the answer text."""
-        self.text = text
+        self.__text = text
     
     def get_citations(self) -> List[str]:
-        return self.citations.copy()
+        return self.__citations.copy()
     
     def add_citation(self, citation: str) -> None:
-       
         if citation and citation.strip():
-            self.citations.append(citation)
-    
+            self.__citations.append(citation)
+
     def has_citations(self) -> bool:
-        """Check if the answer has any citations."""
-        return len(self.citations) > 0
+        return bool(self.__citations)
     
     def to_single_line(self) -> str:
-       
-        result = self.text if self.text else ""
+        current_text = self.__text if self.__text else ""
         
         if self.has_citations():
-            result += " See: " + ", ".join(self.citations)
+            citation_string = ", ".join(self.__citations)
+            return f"{current_text} See: {citation_string}"
         
-        return result
+        return current_text
     
     def __str__(self) -> str:
         return self.to_single_line()
-    
-    def __repr__(self) -> str:
-        return f"Answer(text={self.text!r}, citations={self.citations!r})"
+

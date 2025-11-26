@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 from pathlib import Path
 
-from models import Intent
+from model import Intent
 
 
 class IntentRulesLoader:

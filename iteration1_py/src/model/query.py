@@ -1,20 +1,12 @@
 class Query:
-    
-    
     def __init__(self, text: str = None):
-      
-        self.text = text
-    
+        self.__text = text
+
+    # Getter
     def get_text(self) -> str:
-        
-        return self.text
-    
-    def set_text(self, text: str) -> None:
-        
-        self.text = text
-    
+        return self.__text
+
+    # String representation
     def __str__(self) -> str:
-        return f"Query(text={self.text!r})"
+        return f"Query{{text='{self.__text}'}}"
     
-    def __repr__(self) -> str:
-        return f"Query(text={self.text!r})"
