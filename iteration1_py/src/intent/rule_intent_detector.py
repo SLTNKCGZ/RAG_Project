@@ -7,15 +7,13 @@ from intent_detector import IntentDetector
 class RuleIntentDetector(IntentDetector):
   
 
-    def __init__(
-        self,
-        rules: Dict[Intent, List[str]],
-        priority_order: List[Intent]
+    def __init__(self, rules: Dict[Intent, List[str]], priority_order: List[Intent]
     ) -> None:
     
-        self.rules: Dict[Intent, List[str]] = rules
-        self.priority_order: List[Intent] = priority_order
-
+        self._rules: Dict[Intent, List[str]] = rules
+        self._priority_order: List[Intent] = priority_order
+    
+    @override
     def detect(self, question: str) -> Intent:
       
         if question is None or question.strip() == "":

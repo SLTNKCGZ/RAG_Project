@@ -9,13 +9,13 @@ class IntentRulesLoader:
     def load_rules(self, rules_file_path: Path) -> Dict[Intent, List[str]]:
         try:
             lines: List[str] = rules_file_path.read_text(encoding="utf-8").splitlines()
-            return self._parse_intent_rules(lines)
+            return self.__parse_intent_rules(lines)
         except Exception as e:
             raise RuntimeError(
                 f"Failed to load intent rules from: {rules_file_path}"
             ) from e
 
-    def _parse_intent_rules(self, lines: List[str]) -> Dict[Intent, List[str]]:
+    def __parse_intent_rules(self, lines: List[str]) -> Dict[Intent, List[str]]:
 
         rules: Dict[Intent, List[str]] = {}
         priority: List[Intent] = []
@@ -47,8 +47,8 @@ class IntentRulesLoader:
             # Priority section
             if in_intent_priority and trimmed.startswith("-"):
                 intent_name: str = trimmed[1:].strip()
-                intent_name = self._strip_quotes(intent_name)
-                intent: Intent = self._parse_intent_name(intent_name)
+                intent_name = self.__strip_quotes(intent_name)
+                intent: Intent = self.__parse_intent_name(intent_name)
                 priority.append(intent)
                 continue
 
@@ -61,14 +61,14 @@ class IntentRulesLoader:
 
                     # New intent block
                     intent_name: str = trimmed[:-1].strip()
-                    current_intent = self._parse_intent_name(intent_name)
+                    current_intent = self.__parse_intent_name(intent_name)
                     current_keywords = []
                     continue
 
                 # Keyword line
                 if trimmed.startswith("-") and current_intent is not None:
                     kw: str = trimmed[1:].strip()
-                    kw = self._strip_quotes(kw)
+                    kw = self.__strip_quotes(kw)
                     current_keywords.append(kw)
 
         # Save last block
@@ -89,14 +89,14 @@ class IntentRulesLoader:
 
         return ordered_rules
 
-    def _strip_quotes(self, text: str) -> str:
+    def __strip_quotes(self, text: str) -> str:
 
         if (text.startswith('"') and text.endswith('"')) or \
            (text.startswith("'") and text.endswith("'")):
             return text[1:-1]
         return text
 
-    def _parse_intent_name(self, yaml_name: str) -> Intent:
+    def __parse_intent_name(self, yaml_name: str) -> Intent:
     
         name = yaml_name.upper()
 

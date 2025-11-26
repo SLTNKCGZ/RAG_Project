@@ -9,5 +9,4 @@ class Reranker(ABC):
 
     @abstractmethod
     def rerank(self, query: List[str], hits: List[Hit], store: 'ChunkStore') -> List['Hit']:
-        
         pass

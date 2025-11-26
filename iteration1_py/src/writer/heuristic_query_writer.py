@@ -24,16 +24,16 @@ class HeuristicQueryWriter(QueryWriter):
 
         # Normalize stopwords
         if stopwords is None:
-            self.stopwords: Set[str] = set()
+            self.__stopwords: Set[str] = set()
         else:
-            self.stopwords = {
+            self.__stopwords = {
                 s.lower() for s in stopwords
                 if s is not None and s.strip() != ""
             }
 
         # Normalize boosters
         if intent_boosters is None:
-            self.intent_boosters: Dict[Intent, List[str]] = {}
+            self.__intent_boosters: Dict[Intent, List[str]] = {}
         else:
             normalized: Dict[Intent, List[str]] = {}
 
@@ -45,12 +45,11 @@ class HeuristicQueryWriter(QueryWriter):
                 ]
                 normalized[intent] = clean_tokens
 
-            self.intent_boosters = normalized
+            self.__intent_boosters = normalized
 
+    @override
     def write(self, question: str, intent: Intent) -> List[str]:
-        """
-        Generate cleaned + enriched query terms for downstream RAG components.
-        """
+        
 
         if question is None or question.strip() == "":
             return []
@@ -69,13 +68,13 @@ class HeuristicQueryWriter(QueryWriter):
             token: str = p.strip()
             if not token:
                 continue
-            if token in self.stopwords:
+            if token in self.__stopwords:
                 continue
             ordered_terms[token] = None
 
         # Add boosters according to detected intent
         resolved_intent: Intent = intent if intent is not None else Intent.Unknown
-        boosters: List[str] = self.intent_boosters.get(resolved_intent, [])
+        boosters: List[str] = self.__intent_boosters.get(resolved_intent, [])
 
         for booster in boosters:
             ordered_terms[booster] = None
