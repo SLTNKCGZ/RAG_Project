@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
-from data.chunk_store import ChunkStore
-from model.hit import Hit
+from src.data.chunk_store import ChunkStore
+from src.model.hit import Hit
 
 class Retriever(ABC):
 

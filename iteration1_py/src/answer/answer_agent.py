@@ -5,7 +5,7 @@ from src.model.answer import Answer
 from src.data.chunk_store import ChunkStore
 
 
-class AnswerAgentAbstract(ABC):
+class AnswerAgent(ABC):
     @abstractmethod
     def answer(self, query: List[str], top_hits: List[Hit], chunk_store: ChunkStore) -> Answer:
         

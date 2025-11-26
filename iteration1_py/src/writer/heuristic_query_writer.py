@@ -1,5 +1,4 @@
 import re
-import locale
 from typing import Dict, List, Set, Optional
 
 from src.model.intent import Intent
@@ -73,7 +72,7 @@ class HeuristicQueryWriter(QueryWriter):
             ordered_terms[token] = None
 
         # Add boosters according to detected intent
-        resolved_intent: Intent = intent if intent is not None else Intent.Unknown
+        resolved_intent: Intent = intent if intent is not None else Intent.UNKNOWN
         boosters: List[str] = self.__intent_boosters.get(resolved_intent, [])
 
         for booster in boosters:

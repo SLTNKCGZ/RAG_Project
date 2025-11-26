@@ -1,11 +1,14 @@
-from typing import List, Optional
-from model.answer import Answer
-from model.hit import Hit
-from model.chunk import Chunk
-from data.chunk_store import ChunkStore
+import re
+from typing import List
+
+from src.answer.answer_agent import AnswerAgent
+from src.model.answer import Answer
+from src.model.hit import Hit
+from src.model.chunk import Chunk
+from src.data.chunk_store import ChunkStore
 
 
-class TemplateAnswerAgent:
+class TemplateAnswerAgent(AnswerAgent):
     def __init__(self):
         pass
     
@@ -16,30 +19,30 @@ class TemplateAnswerAgent:
 
         # Get best hit (first after reranking)
         best_hit = top_hits[0]
-        best_chunk = chunk_store.get_chunk(best_hit.doc_id, best_hit.chunk_id)
+        best_chunk = chunk_store.get_chunk(best_hit.get_doc_id(), best_hit.get_chunk_id())
 
         if best_chunk is None:
             return Answer("Üzgünüm, sorunuza ait detaylı metni bulamadım.", [])
 
         # Select sentence
-        best_sentence = self.__select_best_sentence(best_chunk.text, query_terms)
+        best_sentence = self.__select_best_sentence(best_chunk.get_text(), query_terms)
 
         # Build source description
-        doc_title = chunk_store.get_document_title(best_chunk.doc_id)
+        doc_title = chunk_store.get_document_title(best_chunk.get_doc_id())
 
         if doc_title:
-            source = f'Bu cevap "{doc_title}" başlıklı belgenin {best_chunk.section_id} bölümünden alınmıştır. '
+            source = f'Bu cevap "{doc_title}" başlıklı belgenin {best_chunk.get_section_id()} bölümünden alınmıştır. '
         else:
-            source = f'Bu cevap {best_chunk.doc_id} belgesinin {best_chunk.section_id} bölümünden alınmıştır. '
+            source = f'Bu cevap {best_chunk.get_doc_id()} belgesinin {best_chunk.get_section_id()} bölümünden alınmıştır. '
 
         answer_text = source + "Cevabınız: " + best_sentence
 
         # Citations (first 3)
         citations: List[str] = []
         for hit in top_hits[:3]:
-            chunk = chunk_store.get_chunk(hit.doc_id, hit.chunk_id)
+            chunk = chunk_store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
             if chunk:
-                citations.append(self.__format_citation(chunk))
+                citations.append(self._format_citation(chunk))
 
         return Answer(answer_text, citations)
 
@@ -47,7 +50,7 @@ class TemplateAnswerAgent:
     # Private helpers
     # --------------------------
 
-    def _select_best_sentence(self, text: str, query_terms: List[str]) -> str:
+    def __select_best_sentence(self, text: str, query_terms: List[str]) -> str:
         if not text:
             return "Bilgi bulunamadı."
 
@@ -90,7 +93,7 @@ class TemplateAnswerAgent:
 
         return best_sentence
 
-    def _count_query_terms(self, sentence: str, query_terms: List[str]) -> int:
+    def __count_query_terms(self, sentence: str, query_terms: List[str]) -> int:
         if not query_terms:
             return 0
 
@@ -98,4 +101,4 @@ class TemplateAnswerAgent:
         return sum(1 for term in query_terms if term in lower_sentence)
 
     def _format_citation(self, chunk: Chunk) -> str:
-        return f"{chunk.doc_id}:{chunk.section_id}:{chunk.start_offset}-{chunk.end_offset}"
+        return f"{chunk.get_doc_id()}:{chunk.get_section_id()}:{chunk.get_start_offset()}-{chunk.get_end_offset()}"

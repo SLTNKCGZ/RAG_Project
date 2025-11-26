@@ -1,6 +1,6 @@
-from typing import List
-import collections 
-from src.reranker.reranker_abstract import Reranker
+from typing import List, Optional
+
+from src.reranker.reranker import Reranker
 from src.data.chunk_store import ChunkStore
 from src.model.chunk import Chunk
 from src.model.hit import Hit 
@@ -36,7 +36,7 @@ class SimpleReranker(Reranker):
                 
         return False
 
-    def rerank(self, queryTerms: List[str], hits: List[Hit], store: ChunkStore) -> List[Hit]:
+    def rerank(self, query_terms: List[str], hits: List[Hit], store: ChunkStore) -> List[Hit]:
        
         if not hits:
             return []
@@ -44,27 +44,27 @@ class SimpleReranker(Reranker):
         reranked: List[Hit] = []
 
         for hit in hits:
-            chunk: Chunk = store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
+            chunk: Optional[Chunk] = store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
             
             if chunk is None:
                 continue
             score: int = hit.get_score() * 10
 
-            if queryTerms and len(queryTerms) >= 2:
+            if query_terms and len(query_terms) >= 2:
 
                 chunk_text_lower = chunk.get_text().lower()
                 
-                if self._any_terms_within_window(chunk_text_lower, queryTerms, self.__proximity_window):
+                if self.__any_terms_within_window(chunk_text_lower, query_terms, self.__proximity_window):
                     score += self.__proximity_bonus
 
-            doc_title: str = store.get_document_title(hit.get_doc_id())
+            doc_title: Optional[str] = store.get_document_title(hit.get_doc_id())
             
             if doc_title:
                
                 title_lower = doc_title.lower()
                 
                
-                for term in queryTerms:
+                for term in query_terms:
                     if not term:
                         continue
                         

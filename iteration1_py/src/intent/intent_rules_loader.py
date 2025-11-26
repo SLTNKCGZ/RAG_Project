@@ -1,7 +1,7 @@
-from typing import List, Dict, Optional
 from pathlib import Path
+from typing import Dict, List, Optional
 
-from model import Intent
+from src.model.intent import Intent
 
 
 class IntentRulesLoader:
@@ -101,14 +101,14 @@ class IntentRulesLoader:
         name = yaml_name.upper()
 
         if name == "REGISTRATION":
-            return Intent.Registration
+            return Intent.REGISTRATION
         if name == "STAFF_LOOKUP":
-            return Intent.StaffLookup
+            return Intent.STAFF_LOOKUP
         if name == "POLICY_FAQ":
-            return Intent.PolicyFAQ
+            return Intent.POLICY_FAQ
         if name == "COURSE":
-            return Intent.Course
+            return Intent.COURSE
         if name == "UNKNOWN":
-            return Intent.Unknown
+            return Intent.UNKNOWN
 
         raise ValueError(f"Unknown intent name: {yaml_name}")

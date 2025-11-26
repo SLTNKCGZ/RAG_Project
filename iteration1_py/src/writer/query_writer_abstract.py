@@ -3,7 +3,7 @@ from typing import List
 from src.model.intent import Intent
 
 
-class QueryWriterAbstract(ABC):
+class QueryWriter(ABC):
    
     @abstractmethod
     def write(self, question: str, intent: Intent) -> List[str]:

@@ -8,7 +8,7 @@ class ChunkStore:
         self.__document_titles: Dict[str, str] = {}  # key: docId, value: title
 
     def add_chunk(self, chunk: Chunk) -> None:
-        key = f"{chunk.doc_id}||{chunk.chunk_id}"
+        key = f"{chunk.get_doc_id()}||{chunk.get_chunk_id()}"
         self.__chunks[key] = chunk
 
     def get_chunk(self, doc_id: str, chunk_id: str) -> Optional[Chunk]:

@@ -1,6 +1,6 @@
 import yaml
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List, Optional
 
 from src.config.config import Config
 
@@ -35,12 +35,12 @@ class ConfigLoader:
             chunk_store = config_map.get("paths.chunk_store")
             logs_dir = config_map.get("paths.logs_dir")
 
-            base_dir = self._config_path.parent or self._config_path.resolve().parent
+            base_dir = self.__config_path.parent or self.__config_path.resolve().parent
 
-            rules_path = self._resolve_path(base_dir, rules_file)
-            stopwords_path = self._resolve_path(base_dir, stopwords_file)
-            chunk_path = self._resolve_path(base_dir, chunk_store)
-            logs_path = self._resolve_path(base_dir, logs_dir)
+            rules_path = self.__resolve_path(base_dir, rules_file)
+            stopwords_path = self.__resolve_path(base_dir, stopwords_file)
+            chunk_path = self.__resolve_path(base_dir, chunk_store)
+            logs_path = self.__resolve_path(base_dir, logs_dir)
             
             return Config(
                 intent_type=intent_type,
@@ -48,17 +48,17 @@ class ConfigLoader:
                 retriever_type=retriever_type,
                 reranker_type=reranker_type,
                 answer_agent_type=answer_agent_type,
-                rules_file_path=rules_file_path,
+                rules_file_path=rules_path,
                 top_k=int(top_k),
-                stopwords_file_path=stopwords_file_path,
+                stopwords_file_path=stopwords_path,
                 top_n=int(top_n),
                 chunk_path=chunk_path,
-                logs_dir_path=logs_dir_path
+                logs_dir_path=logs_path
             )
         
         
         except Exception as e:
-            raise RuntimeError(f"Failed to load configuration from {self.config_path}: {e}")
+            raise RuntimeError(f"Failed to load configuration from {self.__config_path}: {e}")
     
 
     # ---------------------------

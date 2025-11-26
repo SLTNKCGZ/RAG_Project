@@ -3,7 +3,7 @@ from src.model.intent import Intent
 from typing import Optional
 
 
-class IntentDetectorAbstract(ABC):
+class IntentDetector(ABC):
    
     @abstractmethod
     def detect(self, question: str) -> Intent:

@@ -2,11 +2,11 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-from src.trace.trace_sink_abstract import TraceSinkAbstract
+from src.trace.trace_sink import TraceSink
 from src.trace.trace_event import TraceEvent
 
 
-class JsonlTraceSink(TraceSinkAbstract):
+class JsonlTraceSink(TraceSink):
   
     def __init__(self, logs_dir: Path):
         logs_dir = Path(logs_dir)
