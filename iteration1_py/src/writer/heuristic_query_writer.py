@@ -2,8 +2,8 @@ import re
 import locale
 from typing import Dict, List, Set, Optional
 
-from models import Intent
-from query_writer import QueryWriter
+from src.model.intent import Intent
+from src.writer.query_writer_abstract import QueryWriter
 
 
 class HeuristicQueryWriter(QueryWriter):
@@ -47,7 +47,7 @@ class HeuristicQueryWriter(QueryWriter):
 
             self.__intent_boosters = normalized
 
-    @override
+    
     def write(self, question: str, intent: Intent) -> List[str]:
         
 

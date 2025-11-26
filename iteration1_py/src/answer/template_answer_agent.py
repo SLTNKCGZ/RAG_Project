@@ -8,7 +8,7 @@ from data.chunk_store import ChunkStore
 class TemplateAnswerAgent:
     def __init__(self):
         pass
-    @override
+    
     def answer(self, query_terms: List[str], top_hits: List[Hit], chunk_store: ChunkStore) -> Answer:
         # If no hits → fallback
         if not top_hits:

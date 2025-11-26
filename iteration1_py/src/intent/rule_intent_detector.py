@@ -1,10 +1,10 @@
 from typing import Dict, List
-from models import Intent
-from chunk_store import ChunkStore   # Eğer gerekirse, kullanılmasa bile import sorun olmaz
-from intent_detector import IntentDetector
+
+from src.model.intent import Intent
+from src.intent.intent_detector_abstract import IntentDetectorAbstract
 
 
-class RuleIntentDetector(IntentDetector):
+class RuleIntentDetector(IntentDetectorAbstract):
   
 
     def __init__(self, rules: Dict[Intent, List[str]], priority_order: List[Intent]
@@ -13,7 +13,7 @@ class RuleIntentDetector(IntentDetector):
         self._rules: Dict[Intent, List[str]] = rules
         self._priority_order: List[Intent] = priority_order
     
-    @override
+    
     def detect(self, question: str) -> Intent:
       
         if question is None or question.strip() == "":
