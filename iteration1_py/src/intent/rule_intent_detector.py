@@ -1,10 +1,10 @@
 from typing import Dict, List
-from models import Intent
-from chunk_store import ChunkStore   # Eğer gerekirse, kullanılmasa bile import sorun olmaz
-from intent_detector import IntentDetector
+
+from src.model.intent import Intent
+from src.intent.intent_detector_abstract import IntentDetectorAbstract
 
 
-class RuleIntentDetector(IntentDetector):
+class RuleIntentDetector(IntentDetectorAbstract):
   
 
     def __init__(

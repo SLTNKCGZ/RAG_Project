@@ -1,9 +1,9 @@
 from typing import List, Dict
 
-from data.chunk_store import ChunkStore
-from model.chunk import Chunk
-from model.hit import Hit
-from retriever_abstract import Retriever 
+from src.data.chunk_store import ChunkStore
+from src.model.chunk import Chunk
+from src.model.hit import Hit
+from src.retrieval.retriever_abstract import Retriever 
 
 class KeywordRetriever(Retriever):
 

@@ -1,8 +1,10 @@
 from typing import List, Optional
 import re
 
-from models import Answer, Chunk, Hit
-from chunk_store import ChunkStore
+from src.model.answer import Answer
+from src.model.chunk import Chunk
+from src.model.hit import Hit
+from src.data.chunk_store import ChunkStore
 
 
 class TemplateAnswerAgent:
