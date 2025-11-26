@@ -44,8 +44,6 @@ htmlcov/
 .tox/
 .hypothesis/
 
-# Logs
-logs/
 
 # MyPy
 .mypy_cache/
