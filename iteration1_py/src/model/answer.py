@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Optional
+
 
 class Answer:
     
-    def __init__(self, text: str, citations: List[str]):
+    def __init__(self, text: str = "", citations: Optional[List[str]] = None):
         self.__text: str = text
-        self.__citations: List[str] = list(citations)
+        self.__citations: List[str] = citations if citations is not None else []
 
     def get_text(self) -> str:
         return self.__text
