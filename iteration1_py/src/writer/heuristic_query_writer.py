@@ -6,10 +6,7 @@ from src.writer.query_writer_abstract import QueryWriter
 
 
 class HeuristicQueryWriter(QueryWriter):
-    """
-    Heuristic query writer that cleans user questions, removes stopwords,
-    and adds intent-specific booster tokens.
-    """
+
 
     # TR locale pattern is approximated because Python locale lowercasing differs
     CLEAN_REGEX = r"[^A-Za-zÇĞİÖŞÜçğıöşü0-9 ]"

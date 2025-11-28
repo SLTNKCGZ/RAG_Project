@@ -6,10 +6,7 @@ from src.config.config import Config
 
 
 class ConfigLoader:
-    """
-    Loads configuration from YAML file.
-    Parses the config.yaml file and creates a Config object.
-    """
+
     
     def __init__(self, config_path: Path):
         self.__config_path = Path(config_path)
@@ -61,9 +58,7 @@ class ConfigLoader:
             raise RuntimeError(f"Failed to load configuration from {self.__config_path}: {e}")
     
 
-    # ---------------------------
-    # PRIVATE METHODS (Java: private)
-    # ---------------------------
+
     def __parse_yaml(self, lines: List[str]) -> Dict[str, str]:
         map_data: Dict[str, str] = {}
         section = None

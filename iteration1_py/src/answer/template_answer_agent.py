@@ -42,7 +42,7 @@ class TemplateAnswerAgent(AnswerAgent):
         for hit in top_hits[:3]:
             chunk = chunk_store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
             if chunk:
-                citations.append(self._format_citation(chunk))
+                citations.append(self.__format_citation(chunk))
 
         return Answer(answer_text, citations)
 
@@ -100,5 +100,5 @@ class TemplateAnswerAgent(AnswerAgent):
         lower_sentence = sentence.lower()
         return sum(1 for term in query_terms if term in lower_sentence)
 
-    def _format_citation(self, chunk: Chunk) -> str:
+    def __format_citation(self, chunk: Chunk) -> str:
         return f"{chunk.get_doc_id()}:{chunk.get_section_id()}:{chunk.get_start_offset()}-{chunk.get_end_offset()}"
