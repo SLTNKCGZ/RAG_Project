@@ -5,12 +5,17 @@ from src.model.hit import Hit
 from src.reranker.reranker import Reranker
 
 
-class CosineReranker(Reranker):
+class HybridReranker(Reranker):
     """
-    Semantic-only reranker.
-    Assumes incoming Hit scores are cosine similarity scores
-    produced by VectorRetriever.
+    Final decision reranker.
+    Does NOT recompute scores.
+    Only orders incoming hits deterministically.
     """
+
+    def __init__(self, alpha: float, beta: float):
+        # alpha, beta kept for configurability / future use
+        self.__alpha = alpha
+        self.__beta = beta
 
     def rerank(
         self,
@@ -21,14 +26,14 @@ class CosineReranker(Reranker):
         if not hits:
             return []
 
-        # No recomputation of embeddings or cosine similarity here.
-        # Simply reorder by existing vector-based score.
+        # IMPORTANT:
+        # Do NOT modify scores here.
         reranked = list(hits)
 
         reranked.sort(
             key=lambda h: (
-                -h.get_score(),     # higher cosine score first
-                h.get_doc_id(),     # deterministic tie-break
+                -h.get_score(),
+                h.get_doc_id(),
                 h.get_chunk_id()
             )
         )
