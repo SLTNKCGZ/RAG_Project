@@ -1,0 +1,37 @@
+intent_priority:
+  - "REGISTRATION"
+  - "STAFF_LOOKUP"
+  - "POLICY_FAQ" 
+  - "COURSE"
+  - "UNKNOWN"
+
+# Keyword Rules - SOLID OCP: Yeni intent'ler eklenebilir
+keyword_rules:
+  REGISTRATION:
+    - "kayıt"
+    - "transkript"
+    - "şube"
+  
+  STAFF_LOOKUP:
+    - "ofis"
+    - "numara"
+    - "e-posta"
+    - "profesör"
+    - "doçent"
+  
+  COURSE:
+    - "ders"
+    - "course"
+    - "kredi"
+    - "ön koşul"
+    - "not"
+    - "başarı"
+    - "geçme"
+    - "harf"
+    - "bağlı"
+
+  
+  POLICY_FAQ:
+    - "politika"
+    - "kural"
+    - "yönetmelik"
