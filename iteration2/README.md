@@ -73,8 +73,8 @@ During execution:
 pipeline:
   intent_detector: "RuleIntentDetector"      # Intent detector class name
   query_writer: "HeuristicQueryWriter"       # Query writer
-  retriever: "KeywordRetriever"              # Retriever type (KeywordRetriever, VectorRetriever, HybridRetriever)
-  reranker: "SimpleReranker"                 # Reranker type (SimpleReranker, CosineReranker, HybridReranker)
+  retriever: "HybridRetriever"               # Retriever type (KeywordRetriever, VectorRetriever, HybridRetriever)
+  reranker: "HybridReranker"                 # Reranker type (SimpleReranker, CosineReranker, HybridReranker)
   answer_agent: "TemplateAnswerAgent"        # Answer agent
 
 params:
@@ -82,9 +82,24 @@ params:
     rules_file: "./intent_rules.yaml"        # Intent rules (keyword lists)
   retriever: 
     top_k: "10"                              # Max number of hits kept after retrieval
+    alpha: "0.5"                             # Weight for keyword retrieval (HybridRetriever)
+    beta: "0.5"                              # Weight for vector retrieval (HybridRetriever)
+  embedding:
+    provider: "SimpleEmbeddingProvider"      # Embedding provider for vector retrieval
   query_writer:
     stopwords_file: "./stopwords.yaml"       # Stopword list
+    suffixes_file: "./suffixes.yaml"         # Suffix list for stemming
+    conjunctions_file: "./conjunctions.yaml" # Conjunction list
+    tf_weight: "1.0"                         # Term frequency weight
+    booster_weight: "2.0"                    # Booster weight for important terms
+    base_weight: "1.0"                       # Base weight for terms
     top_n: "8"                               # Max number of terms in the written query
+  reranker:
+    proximity_window: "15"                   # Window size for proximity scoring
+    proximity_bonus: "5"                     # Bonus score for proximity matches
+    title_boost: "3"                         # Boost score for title matches
+    alpha: "0.5"                             # Weight for simple reranking (HybridReranker)
+    beta: "0.5"                              # Weight for cosine reranking (HybridReranker)
 
 paths:
   chunk_store: "./chunks.json"               # Chunk data (text fragments)
@@ -103,7 +118,10 @@ iteration2/
     config.yaml          # Pipeline configuration
     intent_rules.yaml    # Intent rules
     stopwords.yaml       # Stopword list
+    suffixes.yaml        # Suffix list for stemming
+    conjunctions.yaml    # Conjunction list
     logs/                # JSONL run logs
+    query_cache.json     # Query cache for retrieval
 
   eval/
     ground_truth.json    # Ground truth answers for evaluation
@@ -116,6 +134,9 @@ iteration2/
       __init__.py
       answer_agent.py
       template_answer_agent.py
+    cache/               # Query cache implementation
+      __init__.py
+      query_cache.py
     config/              # Config classes and loader
       __init__.py
       config.py
@@ -162,7 +183,6 @@ iteration2/
       __init__.py
       hybrid_retriever.py
       keyword_retriever.py
-      query_cache.py
       retriever.py
       vector_retriver.py
     trace/               # Trace events and JSONL sink
