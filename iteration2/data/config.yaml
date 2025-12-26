@@ -1,8 +1,8 @@
 pipeline:
   intent_detector: "RuleIntentDetector"
   query_writer: "HeuristicQueryWriter" 
-  retriever: "KeywordRetriever"
-  reranker: "SimpleReranker"
+  retriever: "HybridRetriever"
+  reranker: "CosineReranker"
   answer_agent: "TemplateAnswerAgent"
 
 params:
@@ -10,9 +10,24 @@ params:
     rules_file: "./intent_rules.yaml"
   retriever: 
     top_k: "10"
+    alpha: "0.5"
+    beta: "0.5"
+  embedding:
+    provider: "SimpleEmbeddingProvider"
   query_writer:
     stopwords_file: "./stopwords.yaml"
+    suffixes_file: "./suffixes.yaml"
+    conjunctions_file: "./conjunctions.yaml"
+    tf_weight: "1.0"
+    booster_weight: "2.0"
+    base_weight: "1.0"
     top_n: "8"
+  reranker:
+    proximity_window: "15"
+    proximity_bonus: "5"
+    title_boost: "3"
+    alpha: "0.5"
+    beta: "0.5"
 
 paths:
   chunk_store: "./chunks.json"

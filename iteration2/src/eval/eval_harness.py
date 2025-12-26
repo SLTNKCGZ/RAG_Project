@@ -12,6 +12,7 @@ from src.data.chunk_loader import ChunkLoader
 from src.orchestrator.sequential_rag_pipeline import SequentialRagPipeline
 from src.trace.trace_bus import TraceBus
 from src.model.query import Query
+from src.model.hit import Hit
 
 class EvalHarness:
     
@@ -38,14 +39,38 @@ class EvalHarness:
         text = re.sub(r'\s+', ' ', text).strip()
         return text
 
+    def calculate_coverage_at_k(self, hits: List[Hit], expected_keywords: List[str], k: int = 10) -> float:
+        """Calculate coverage@k: how many of the top-k chunks contain expected keywords."""
+        if not hits or not expected_keywords:
+            return 0.0
+        
+        top_k_hits = hits[:k]
+        if not top_k_hits:
+            return 0.0
+        
+        matched_chunks = 0
+        for hit in top_k_hits:
+            chunk = self.chunk_store.get_chunk(hit.get_doc_id(), hit.get_chunk_id())
+            if chunk is None:
+                continue
+            chunk_text_clean = self.normalize_text(chunk.get_text())
+            for kw in expected_keywords:
+                kw_clean = self.normalize_text(kw)
+                if kw_clean in chunk_text_clean:
+                    matched_chunks += 1
+                    break
+        
+        return matched_chunks / len(top_k_hits) if top_k_hits else 0.0
+
     def run(self):
         total_questions = len(self.test_cases)
-        print(f"\nStarting ACCURACY evaluation on {total_questions} questions...")
-        print("Please wait, processing...\n")
+        print(f"\nStarting evaluation on {total_questions} questions...")
+        print("Metrics: Accuracy, Coverage@k, Latency\n")
         
         trace_bus = TraceBus()
         latencies = []
-        correct_count = 0 
+        correct_count = 0
+        coverage_scores = []
 
         for i, case in enumerate(self.test_cases, 1):
             question_text = case.get("question")
@@ -69,6 +94,7 @@ class EvalHarness:
                 
                 answer_clean = self.normalize_text(final_answer_text)
                 
+                # Calculate accuracy (keyword in answer)
                 found_any = False
                 for kw in expected_kws:
                     kw_clean = self.normalize_text(kw)
@@ -79,33 +105,46 @@ class EvalHarness:
                 if found_any:
                     correct_count += 1
                 
-                print(f"\rProgress: {i}/{total_questions} | Current Accuracy: {(correct_count/i)*100:.2f}%", end="")
+                # Calculate coverage@k (using reranked hits, default k=10)
+                reranked_hits = context.get_reranked_hits()
+                if reranked_hits:
+                    # Get top_k from config or use default 10
+                    top_k = self.config.get_top_k()
+                    coverage = self.calculate_coverage_at_k(reranked_hits, expected_kws, k=top_k)
+                    coverage_scores.append(coverage)
+                else:
+                    coverage_scores.append(0.0)
+                
+                print(f"\rProgress: {i}/{total_questions} | Accuracy: {(correct_count/i)*100:.2f}% | Avg Coverage: {statistics.mean(coverage_scores)*100:.2f}%", end="")
                 
             except Exception as e:
                 print(f"\nError on Q{i}: {e}")
                 latencies.append(0)
+                coverage_scores.append(0.0)
 
         print("\n\n" + "-" * 60)
-        self.__print_report(total_questions, correct_count, latencies)
+        self.__print_report(total_questions, correct_count, latencies, coverage_scores)
 
-    def __print_report(self, total, correct, latencies):
+    def __print_report(self, total, correct, latencies, coverage_scores):
         if total == 0: return
 
         accuracy = (correct / total) * 100
+        avg_coverage = statistics.mean(coverage_scores) * 100 if coverage_scores else 0.0
         avg_latency = statistics.mean(latencies) if latencies else 0
         min_latency = min(latencies) if latencies else 0
         max_latency = max(latencies) if latencies else 0
 
-        print("\n" + "="*30)
-        print("   FINAL EVALUATION REPORT   ")
-        print("="*30)
-        print(f"Total Questions : {total}")
-        print(f"Correct Answers : {correct}")
-        print(f"Wrong Answers   : {total - correct}")
-        print("-" * 30)
-        print(f"SYSTEM ACCURACY : {accuracy:.2f}%")
-        print("-" * 30)
-        print(f"Avg Latency     : {avg_latency:.2f} ms")
-        print(f"Min Latency     : {min_latency:.2f} ms")
-        print(f"Max Latency     : {max_latency:.2f} ms")
-        print("="*30 + "\n")
+        print("\n" + "="*50)
+        print("        FINAL EVALUATION REPORT        ")
+        print("="*50)
+        print(f"Total Questions     : {total}")
+        print(f"Correct Answers     : {correct}")
+        print(f"Wrong Answers       : {total - correct}")
+        print("-" * 50)
+        print(f"ACCURACY            : {accuracy:.2f}%")
+        print(f"COVERAGE@K          : {avg_coverage:.2f}%")
+        print("-" * 50)
+        print(f"Avg Latency         : {avg_latency:.2f} ms")
+        print(f"Min Latency         : {min_latency:.2f} ms")
+        print(f"Max Latency         : {max_latency:.2f} ms")
+        print("="*50 + "\n")

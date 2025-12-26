@@ -26,8 +26,21 @@ class ConfigLoader:
 
             rules_file = config_map.get("params.intent.rules_file")
             top_k = int(config_map.get("params.retriever.top_k"))
+            retriever_alpha = float(config_map.get("params.retriever.alpha", "0.5"))
+            retriever_beta = float(config_map.get("params.retriever.beta", "0.5"))
+            embedding_provider_type = config_map.get("params.embedding.provider", "SimpleEmbeddingProvider")
             stopwords_file = config_map.get("params.query_writer.stopwords_file")
+            suffixes_file = config_map.get("params.query_writer.suffixes_file")
+            conjunctions_file = config_map.get("params.query_writer.conjunctions_file")
+            tf_weight = float(config_map.get("params.query_writer.tf_weight"))
+            booster_weight = float(config_map.get("params.query_writer.booster_weight"))
+            base_weight = float(config_map.get("params.query_writer.base_weight"))
             top_n = int(config_map.get("params.query_writer.top_n"))
+            proximity_window = int(config_map.get("params.reranker.proximity_window", "15"))
+            proximity_bonus = int(config_map.get("params.reranker.proximity_bonus", "5"))
+            title_boost = int(config_map.get("params.reranker.title_boost", "3"))
+            reranker_alpha = float(config_map.get("params.reranker.alpha", "0.5"))
+            reranker_beta = float(config_map.get("params.reranker.beta", "0.5"))
 
             chunk_store = config_map.get("paths.chunk_store")
             logs_dir = config_map.get("paths.logs_dir")
@@ -36,6 +49,8 @@ class ConfigLoader:
 
             rules_path = self.__resolve_path(base_dir, rules_file)
             stopwords_path = self.__resolve_path(base_dir, stopwords_file)
+            suffixes_path = self.__resolve_path(base_dir, suffixes_file)
+            conjunctions_path = self.__resolve_path(base_dir, conjunctions_file)
             chunk_path = self.__resolve_path(base_dir, chunk_store)
             logs_path = self.__resolve_path(base_dir, logs_dir)
             
@@ -47,8 +62,21 @@ class ConfigLoader:
                 answer_agent_type=answer_agent_type,
                 rules_file_path=rules_path,
                 top_k=int(top_k),
+                retriever_alpha=retriever_alpha,
+                retriever_beta=retriever_beta,
+                embedding_provider_type=embedding_provider_type,
                 stopwords_file_path=stopwords_path,
+                suffixes_file_path=suffixes_path,
+                conjunctions_file_path=conjunctions_path,
+                tf_weight=tf_weight,
+                booster_weight=booster_weight,
+                base_weight=base_weight,
                 top_n=int(top_n),
+                proximity_window=proximity_window,
+                proximity_bonus=proximity_bonus,
+                title_boost=title_boost,
+                reranker_alpha=reranker_alpha,
+                reranker_beta=reranker_beta,
                 chunk_path=chunk_path,
                 logs_dir_path=logs_path
             )

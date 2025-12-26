@@ -15,7 +15,6 @@ from src.model.answer import Answer
 class RagPipeline(ABC):
     
     def __init__(self, config: Config, context: Context, trace_bus: TraceBus):
-        
         self._config = config
         self._context = context
         self._trace_bus = trace_bus
@@ -25,6 +24,7 @@ class RagPipeline(ABC):
         self._retriever = None
         self._reranker = None
         self._answer_agent = None
+        self._vector_index = None
     
     @abstractmethod
     def execute(self) -> None:
@@ -72,11 +72,21 @@ class RagPipeline(ABC):
 
             if self._config.get_writer_type() == "HeuristicQueryWriter":
                 stopwords = self.load_stopwords(self._config.get_stopwords_file_path())
+                suffixes = self.load_suffixes(self._config.get_suffixes_file_path())
+                conjunctions = self.load_conjunctions(self._config.get_conjunctions_file_path())
                 inputs = f"stopwords={len(stopwords)} stopwords{stopwords}"
                 boosters = self._context.get_intent_keyword_rules()
                 if boosters is None:
                     boosters = {}
-                self._query_writer = HeuristicQueryWriter(stopwords, boosters)
+                self._query_writer = HeuristicQueryWriter(
+                    stopwords,
+                    boosters,
+                    suffixes,
+                    conjunctions,
+                    self._config.get_tf_weight(),
+                    self._config.get_booster_weight(),
+                    self._config.get_base_weight()
+                )
             else:
                 raise IllegalArgumentError(f"Unknown query writer type: {self._config.get_writer_type()}")
             
@@ -99,13 +109,41 @@ class RagPipeline(ABC):
         
         try:
             from src.retrieval.keyword_retriever import KeywordRetriever
+            from src.retrieval.vector_retriver import VectorRetriever
+            from src.retrieval.hybrid_retriever import HybridRetriever
+            from src.index.vector_index import VectorIndex
+            from src.embedding.simple_embedding_provider import SimpleEmbeddingProvider
+            from src.writer.simple_stemmer import SimpleStemmer
             
-            if self._config.get_retriever_type() == "KeywordRetriever":
-                self._retriever = KeywordRetriever(self._config.get_top_k())
+            retriever_type = self._config.get_retriever_type()
+            chunk_store = self._context.get_chunk_store()
+            suffixes = self.load_suffixes(self._config.get_suffixes_file_path())
+            stemmer = SimpleStemmer(suffixes=suffixes, min_word_length=3)
+            
+            if retriever_type == "KeywordRetriever":
+                self._retriever = KeywordRetriever(self._config.get_top_k(), stemmer)
+            elif retriever_type == "VectorRetriever":
+                if self._vector_index is None:
+                    embedding_provider = SimpleEmbeddingProvider()
+                    self._vector_index = VectorIndex(chunk_store, embedding_provider)
+                self._retriever = VectorRetriever(self._vector_index, self._config.get_top_k())
+            elif retriever_type == "HybridRetriever":
+                keyword_retriever = KeywordRetriever(self._config.get_top_k(), stemmer)
+                if self._vector_index is None:
+                    embedding_provider = SimpleEmbeddingProvider()
+                    self._vector_index = VectorIndex(chunk_store, embedding_provider)
+                vector_retriever = VectorRetriever(self._vector_index, self._config.get_top_k())
+                self._retriever = HybridRetriever(
+                    keyword_retriever,
+                    vector_retriever,
+                    self._config.get_retriever_alpha(),
+                    self._config.get_retriever_beta(),
+                    self._config.get_top_k()
+                )
             else:
-                raise IllegalArgumentError(f"Unknown retriever type: {self._config.get_retriever_type()}")
+                raise IllegalArgumentError(f"Unknown retriever type: {retriever_type}")
             
-            hits = self._retriever.retrieve(terms, self._context.get_chunk_store())
+            hits = self._retriever.retrieve(terms, chunk_store)
             self._context.set_retrieved_hits(hits)
             outputs_summary = f"Number of hits: {len(hits)} retrievedHits: {hits}"
         except Exception as e:
@@ -126,20 +164,28 @@ class RagPipeline(ABC):
         
         try:
             from src.reranker.simple_reranker import SimpleReranker
-            from src.data.chunk_loader import ChunkLoader
+            from src.reranker.cosine_reranker import CosineReranker
+            from src.reranker.hybrid_reranker import HybridReranker
             
-            if self._config.get_reranker_type() == "SimpleReranker":
-                proximity_window = 15
-                proximity_bonus = 5
-                title_boost = 3
-                self._reranker = SimpleReranker(proximity_window, proximity_bonus, title_boost)
+            reranker_type = self._config.get_reranker_type()
+            
+            if reranker_type == "SimpleReranker":
+                self._reranker = SimpleReranker(
+                    self._config.get_proximity_window(),
+                    self._config.get_proximity_bonus(),
+                    self._config.get_title_boost()
+                )
+            elif reranker_type == "CosineReranker":
+                self._reranker = CosineReranker()
+            elif reranker_type == "HybridReranker":
+                self._reranker = HybridReranker(
+                    self._config.get_reranker_alpha(),
+                    self._config.get_reranker_beta()
+                )
             else:
-                raise IllegalArgumentError(f"Unknown reranker type: {self.__config.get_reranker_type()}")
+                raise IllegalArgumentError(f"Unknown reranker type: {reranker_type}")
             
-            chunk_loader = ChunkLoader()
-            chunk_store = chunk_loader.load_chunks(self._config.get_chunk_path())
-            
-            reranked_hits = self._reranker.rerank(terms, hits, chunk_store)
+            reranked_hits = self._reranker.rerank(terms, hits, self._context.get_chunk_store())
             self._context.set_reranked_hits(reranked_hits)
             outputs_summary = f"Size of rerankedHits: {len(reranked_hits)} hits: {reranked_hits}"
         except Exception as e:
@@ -200,6 +246,58 @@ class RagPipeline(ABC):
             return stopwords
         except Exception as e:
             raise RuntimeError(f"Failed to load stopwords from: {stopwords_path}") from e
+
+    def load_suffixes(self, suffixes_path: Path) -> List[str]:
+        try:
+            suffixes = []
+            in_suffixes = False
+            
+            with open(suffixes_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    trimmed = line.strip()
+                    
+                    if not trimmed or trimmed.startswith("#"):
+                        continue
+                    
+                    if trimmed == "suffixes:":
+                        in_suffixes = True
+                        continue
+                    
+                    if in_suffixes and trimmed.startswith("-"):
+                        suffix = trimmed[1:].strip()
+                        if suffix.startswith('"') and suffix.endswith('"'):
+                            suffix = suffix[1:-1]
+                        suffixes.append(suffix)
+            
+            return suffixes
+        except Exception as e:
+            raise RuntimeError(f"Failed to load suffixes from: {suffixes_path}") from e
+
+    def load_conjunctions(self, conjunctions_path: Path) -> List[str]:
+        try:
+            conjunctions = []
+            in_conjunctions = False
+            
+            with open(conjunctions_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    trimmed = line.strip()
+                    
+                    if not trimmed or trimmed.startswith("#"):
+                        continue
+                    
+                    if trimmed == "conjunctions:":
+                        in_conjunctions = True
+                        continue
+                    
+                    if in_conjunctions and trimmed.startswith("-"):
+                        conjunction = trimmed[1:].strip()
+                        if conjunction.startswith('"') and conjunction.endswith('"'):
+                            conjunction = conjunction[1:-1]
+                        conjunctions.append(conjunction)
+            
+            return conjunctions
+        except Exception as e:
+            raise RuntimeError(f"Failed to load conjunctions from: {conjunctions_path}") from e
 
 
 class IllegalArgumentError(Exception):

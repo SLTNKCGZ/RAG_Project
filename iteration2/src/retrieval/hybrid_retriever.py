@@ -32,17 +32,23 @@ class HybridRetriever(Retriever):
         keyword_hits = self.__keyword_retriever.retrieve(query_terms, store)
         vector_hits = self.__vector_retriever.retrieve(query_terms, store)
 
+        if not keyword_hits and not vector_hits:
+            return []
+
+        keyword_max = max((h.get_score() for h in keyword_hits), default=1.0)
+        vector_max = max((h.get_score() for h in vector_hits), default=1.0)
+
         merged: Dict[str, float] = {}
 
-        # keyword scores
         for hit in keyword_hits:
             key = f"{hit.get_doc_id()}||{hit.get_chunk_id()}"
-            merged[key] = merged.get(key, 0.0) + self.__alpha * hit.get_score()
+            normalized_score = hit.get_score() / keyword_max if keyword_max > 0 else 0.0
+            merged[key] = merged.get(key, 0.0) + self.__alpha * normalized_score
 
-        # vector scores
         for hit in vector_hits:
             key = f"{hit.get_doc_id()}||{hit.get_chunk_id()}"
-            merged[key] = merged.get(key, 0.0) + self.__beta * hit.get_score()
+            normalized_score = hit.get_score() / vector_max if vector_max > 0 else 0.0
+            merged[key] = merged.get(key, 0.0) + self.__beta * normalized_score
 
         hits: List[Hit] = []
 
@@ -52,7 +58,7 @@ class HybridRetriever(Retriever):
                 Hit(
                     doc_id=doc_id,
                     chunk_id=chunk_id,
-                    score=int(score)
+                    score=int(score * 1000)
                 )
             )
 

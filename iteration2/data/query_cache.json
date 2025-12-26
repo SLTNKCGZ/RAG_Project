@@ -1,0 +1,10 @@
+{
+  "serap korkmaz'ın ofisi neresidir?": {
+    "text": "Bu cevap \"arastirma_gorevlileri\" başlıklı belgenin 1.2 bölümünden alınmıştır. Cevabınız: - marmara üniversitesi ofis: m2-201 | dahili: 3548 e-posta: serap",
+    "citations": [
+      "1:1.2:0-234",
+      "27:27.4:0-43",
+      "29:29.59:0-90"
+    ]
+  }
+}

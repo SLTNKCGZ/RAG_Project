@@ -14,12 +14,9 @@ class RagOrchestrator:
         self.__context = context
         self.__trace_bus = TraceBus()
     
-    def run(self, config: Config, question: str) -> None:
-       
-        # Register JsonlTraceSink for logging
+    def run(self, config: Config) -> None:
         jsonl_sink = JsonlTraceSink(config.get_logs_dir_path())
         self.__trace_bus.register(jsonl_sink)
         
-        # Create and execute pipeline
         pipeline = SequentialRagPipeline(config, self.__context, self.__trace_bus)
         pipeline.execute()
