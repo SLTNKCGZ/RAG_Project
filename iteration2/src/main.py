@@ -111,14 +111,13 @@ def _process_batch_queries(config: Config, queries: List[str], batch_path: Path,
         cached_answer = query_cache.get(q_text)
         if cached_answer is not None:
             print(f"Answer (Retrieved from Cache): {cached_answer.to_single_line()}\n")
-            continue
-
-        final_answer = _execute_pipeline(config, q_text, chunk_store)
-        if final_answer is not None:
-            query_cache.set(q_text, final_answer)
-            print(f"Answer: {final_answer.to_single_line()}\n")
         else:
-            print("Answer: (no answer generated)\n")
+            final_answer = _execute_pipeline(config, q_text, chunk_store)
+            if final_answer is not None:
+                query_cache.set(q_text, final_answer)
+                print(f"Answer: {final_answer.to_single_line()}\n")
+            else:
+                print("Answer: (no answer generated)\n")
 
 
 def main() -> None:

@@ -1,10 +1,130 @@
 {
-  "serap korkmaz'ın ofisi neresidir?": {
-    "text": "Bu cevap \"arastirma_gorevlileri\" başlıklı belgenin 1.2 bölümünden alınmıştır. Cevabınız: - marmara üniversitesi ofis: m2-201 | dahili: 3548 e-posta: serap",
+  "odtü robot günleri insansız hava aracı kategorisinde ikincilik hangi öğrencilerin olduğu bir ekiple kazanılmıştır?": {
+    "text": "Bu cevap \"basari\" başlıklı belgenin 2.14 bölümünden alınmıştır. Cevabınız: * odtü robot günleri i̇nsansız hava aracı kategorisinde i̇kincilik (başka bölümlerden de öğrenciler olup, can berk durmuş, elif balcı, can gök, zehra zeynep pehlivan, muhammed raşit ayaz ve muhammed i̇sa akbaba bölüm öğrencileridir- şubat 2019)",
     "citations": [
-      "1:1.2:0-234",
-      "27:27.4:0-43",
-      "29:29.59:0-90"
+      "2:2.14:0-244",
+      "17:17.1:3281-3781",
+      "8:8.1:37826-38317"
+    ]
+  },
+  "marmara üniversitesi bilgisayar mühendisliği bölümü erasmus+ programının temel amacı nedir?": {
+    "text": "Bu cevap \"erasmus\" başlıklı belgenin 3.1 bölümünden alınmıştır. Cevabınız: marmara üniversitesi bilgisayar mühendisliği bölümü - erasmus+ programı bilgileri",
+    "citations": [
+      "3:3.1:0-81",
+      "34:34.1:2047-2541",
+      "1:1.2:0-234"
+    ]
+  },
+  "bölüm erasmus koordinatörü kimdir?": {
+    "text": "Bu cevap \"erasmus\" başlıklı belgenin 3.3 bölümünden alınmıştır. Cevabınız: bölüm erasmus koordinatörü: dr",
+    "citations": [
+      "3:3.3:0-94",
+      "27:27.6:0-396",
+      "29:29.146:0-75"
+    ]
+  },
+  "marmara üniversitesi bilgisayar mühendisliği bölümü hangi ülkelerdeki üniversitelerle erasmus anlaşmasına sahiptir?": {
+    "text": "Bu cevap \"mu_surekli_egitim_merkezi_egitim_ve_sertifika_programlari_yonergesi_v02\" başlıklı belgenin 18.1 bölümünden alınmıştır. Cevabınız: 2003 tarih ve 25085 sayılı resmi gazetede yayımlanarak yürürlüğe giren marmara üniversitesi sürekli eğitim merkezi yönetmeliğine dayanılarak hazırlanmıģtır",
+    "citations": [
+      "18:18.1:403-897",
+      "3:3.1:0-81",
+      "34:34.1:2047-2541"
+    ]
+  },
+  "fakülte sekreterinin adı ve e‑posta adresi nedir?": {
+    "text": "Bu cevap \"y_nerge_m_h.staj\" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: kimlik no : adı soyadı : n öğrenci no : n i̇ bölümü : i̇ c cep telefonu : n e e-posta adresi : r i̇kametgâh adresi : ğ ö sürekli yazışma adresi : tarih i̇mza : mersis numarası n i̇ vergi kimlik numarası : n i̇ unvanı : r e hizmet alanı : y ş telefon : i̇ n e-posta adresi : a l staj adresi : i p a y çalışan mühendis sayısı : (uzmanlık alanına göre) j banka adı : a t banka şube adı ve kodu : s iban :",
+    "citations": [
+      "32:32.1:17269-17764",
+      "32:32.1:18090-18581",
+      "8:8.1:30406-30904"
+    ]
+  },
+  "öğrenci işleri bürosunda çalışan personeller kimlerdir?": {
+    "text": "Bu cevap \"mu_muafiyet_intibak_islemleri_yonergesi_v03\" başlıklı belgenin 14.1 bölümünden alınmıştır. Cevabınız: al programında aldığı dersler öğrencinin anadalından muaf sayılamaz",
+    "citations": [
+      "14:14.1:4114-4614",
+      "17:17.1:11093-11593",
+      "17:17.1:2052-2549"
+    ]
+  },
+  "döner sermaye saymanlığında görevli kişinin adı ve e‑posta adresi nedir?": {
+    "text": "Bu cevap \"y_nerge_m_h.staj\" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: kimlik no : adı soyadı : n öğrenci no : n i̇ bölümü : i̇ c cep telefonu : n e e-posta adresi : r i̇kametgâh adresi : ğ ö sürekli yazışma adresi : tarih i̇mza : mersis numarası n i̇ vergi kimlik numarası : n i̇ unvanı : r e hizmet alanı : y ş telefon : i̇ n e-posta adresi : a l staj adresi : i p a y çalışan mühendis sayısı : (uzmanlık alanına göre) j banka adı : a t banka şube adı ve kodu : s iban :",
+    "citations": [
+      "32:32.1:17269-17764",
+      "32:32.1:18090-18581",
+      "8:8.1:35356-35853"
+    ]
+  },
+  "bilgisayar mühendisliği bölüm sekreterliğinde görevli kişi kimdir?": {
+    "text": "Bu cevap \"organizasyon_semasi\" başlıklı belgenin 27.6 bölümünden alınmıştır. Cevabınız: bilgisayar mühendisliği (bölüm başkanı) 5",
+    "citations": [
+      "27:27.6:0-396",
+      "28:28.22:0-12",
+      "4:4.8:0-87"
+    ]
+  },
+  "müdek ve sürekli i̇yileştirme komisyonu'nun adı nedir?": {
+    "text": "Bu cevap \"y_nerge_m_h.staj\" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: kimlik no : adı soyadı : n öğrenci no : n i̇ bölümü : i̇ c cep telefonu : n e e-posta adresi : r i̇kametgâh adresi : ğ ö sürekli yazışma adresi : tarih i̇mza : mersis numarası n i̇ vergi kimlik numarası : n i̇ unvanı : r e hizmet alanı : y ş telefon : i̇ n e-posta adresi : a l staj adresi : i p a y çalışan sayısı : j banka adı : a t banka şube adı ve kodu : s iban : n türü : i j başlangıç ve bitiş",
+    "citations": [
+      "32:32.1:18090-18581",
+      "5:5.1:0-39",
+      "9:9.1:6167-6667"
+    ]
+  },
+  "i̇ntibak komisyonu başkanı kimdir?": {
+    "text": "Bu cevap \"y_nerge_m_h.staj\" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: tarih tarih tarih (i̇mza) kaşe (i̇mza) (i̇mza) uzun dönem staj başvuru formu t",
+    "citations": [
+      "32:32.1:18090-18581",
+      "5:5.7:0-18",
+      "27:27.6:0-396"
+    ]
+  },
+  "mühendislik projeleri komisyonu'nun başkanı kimdir?": {
+    "text": "Bu cevap \"komisyonlar\" başlıklı belgenin 5.27 bölümünden alınmıştır. Cevabınız: mühendislik projeleri komisyonu",
+    "citations": [
+      "5:5.27:0-31",
+      "27:27.6:0-396",
+      "22:22.1:9040-9537"
+    ]
+  },
+  "i̇ş sağlığı ve güvenliği komisyonu'nda kim başkandır?": {
+    "text": "Bu cevap \"y_nerge_m_h.staj\" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: tarih tarih tarih (i̇mza) kaşe (i̇mza) (i̇mza) uzun dönem staj başvuru formu t",
+    "citations": [
+      "32:32.1:18090-18581",
+      "5:5.51:0-34",
+      "32:32.1:17269-17764"
+    ]
+  },
+  "mezunlarla i̇lişkiler komisyonu'nda hangi öğretim üyeleri yer almaktadır?": {
+    "text": "Bu cevap \"mu_ozel_ogrenci_yonergesi_2023_v02\" başlıklı belgenin 17.1 bölümünden alınmıştır. Cevabınız: diğer yükseköğretim kurumlarından alınacak derslerin üniversite bünyesindeki programlarda açılmamış olması gerekir",
+    "citations": [
+      "17:17.1:6987-7487",
+      "32:32.1:18090-18581",
+      "17:17.1:2052-2549"
+    ]
+  },
+  "fakülte kurulu'nda bölüm başkanı olarak adı geçen profesörlerden bazıları kimlerdir?": {
+    "text": "Bu cevap \"organizasyon_semasi\" başlıklı belgenin 27.6 bölümünden alınmıştır. Cevabınız: biyomühendislik (bölüm başkanı) 5",
+    "citations": [
+      "27:27.6:0-396",
+      "31:31.1:11472-11972",
+      "21:21.1:28011-28506"
+    ]
+  },
+  "kurullar bölümünde adı geçen seçilmiş üyelerden birinin adını söyleyiniz.": {
+    "text": "Bu cevap \"mezuniyetyönergesi_sonhali_09.03.2020_v01\" başlıklı belgenin 11.1 bölümünden alınmıştır. Cevabınız: , b) sertifika alınan programın adı bağlı bulunduğu bölümün adından farklı ise yandal yapılan bölümü adı, c) sertifika alınan programın adı, ç) mezun olunan anadal programın adı bağlı bulunduğu bölümün adından farklı ise anadal yapılan bölümü adı, d) mezun olunan anadal programının adı",
+    "citations": [
+      "11:11.1:24644-25144",
+      "23:23.1:22173-22670",
+      "21:21.1:10691-11191"
+    ]
+  },
+  "marmara üniversitesi'ndeki 'öğrenci ve öğretim elemanı değişim programları komisyonu'nun amacı nedir?": {
+    "text": "Bu cevap \"öğrenme güvencesi sistemi yönergesi\" başlıklı belgenin 34.1 bölümünden alınmıştır. Cevabınız: 2024 tarih ve 32630 sayılı resmi gazete’de yayımlanan lisansüstü eğitim ve öğretim yönetmeliği, marmara üniversitesi eğitim-öğretim programları uygulama yönergesi’ne, marmara üniversitesi sosyal transkript yönergesi’ne dayanılarak hazırlanmıştır",
+    "citations": [
+      "34:34.1:2047-2541",
+      "5:5.15:0-56",
+      "32:32.1:13990-14486"
     ]
   }
 }

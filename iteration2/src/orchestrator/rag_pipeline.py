@@ -124,13 +124,13 @@ class RagPipeline(ABC):
                 self._retriever = KeywordRetriever(self._config.get_top_k(), stemmer)
             elif retriever_type == "VectorRetriever":
                 if self._vector_index is None:
-                    embedding_provider = SimpleEmbeddingProvider()
+                    embedding_provider = SimpleEmbeddingProvider(stemmer)
                     self._vector_index = VectorIndex(chunk_store, embedding_provider)
                 self._retriever = VectorRetriever(self._vector_index, self._config.get_top_k())
             elif retriever_type == "HybridRetriever":
                 keyword_retriever = KeywordRetriever(self._config.get_top_k(), stemmer)
                 if self._vector_index is None:
-                    embedding_provider = SimpleEmbeddingProvider()
+                    embedding_provider = SimpleEmbeddingProvider(stemmer)
                     self._vector_index = VectorIndex(chunk_store, embedding_provider)
                 vector_retriever = VectorRetriever(self._vector_index, self._config.get_top_k())
                 self._retriever = HybridRetriever(

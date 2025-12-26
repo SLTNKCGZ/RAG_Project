@@ -1,0 +1,72 @@
+--- Query #1 ---
+Question: ODTÜ Robot Günleri insansız hava aracı kategorisinde ikincilik hangi öğrencilerin olduğu bir ekiple kazanılmıştır?
+Answer (Retrieved from Cache): Bu cevap "basari" başlıklı belgenin 2.14 bölümünden alınmıştır. Cevabınız: * odtü robot günleri i̇nsansız hava aracı kategorisinde i̇kincilik (başka 
+bölümlerden de öğrenciler olup, can berk durmuş, elif balcı, can gök, zehra zeynep pehlivan, muhammed raşit ayaz ve muhammed i̇sa akbaba bölüm öğrencileridir- şubat 2019) See: 2:2.14:0-244, 17:17.1:3281-3781, 8:8.1:37826-38317
+
+--- Query #2 ---
+Question: Marmara Üniversitesi Bilgisayar Mühendisliği Bölümü Erasmus+ programının temel amacı nedir?
+Answer (Retrieved from Cache): Bu cevap "erasmus" başlıklı belgenin 3.1 bölümünden alınmıştır. Cevabınız: marmara üniversitesi bilgisayar mühendisliği bölümü - erasmus+ programı bilgileri See: 3:3.1:0-81, 34:34.1:2047-2541, 1:1.2:0-234
+
+--- Query #3 ---
+Question: Bölüm Erasmus koordinatörü kimdir?
+Answer (Retrieved from Cache): Bu cevap "erasmus" başlıklı belgenin 3.3 bölümünden alınmıştır. Cevabınız: bölüm erasmus koordinatörü: dr See: 3:3.3:0-94, 27:27.6:0-396, 29:29.146:0-75
+
+--- Query #4 ---
+Question: Marmara Üniversitesi Bilgisayar Mühendisliği Bölümü hangi ülkelerdeki üniversitelerle Erasmus anlaşmasına sahiptir?
+Answer (Retrieved from Cache): Bu cevap "mu_surekli_egitim_merkezi_egitim_ve_sertifika_programlari_yonergesi_v02" başlıklı belgenin 18.1 bölümünden alınmıştır. Cevabınız: 2003 tari
+h ve 25085 sayılı resmi gazetede yayımlanarak yürürlüğe giren marmara üniversitesi sürekli eğitim merkezi yönetmeliğine dayanılarak hazırlanmıģtır See: 18:18.1:403-897, 3:3.1:0-81, 34:34.1:2047-2541
+
+--- Query #5 ---
+Question: Fakülte sekreterinin adı ve e‑posta adresi nedir?
+Answer (Retrieved from Cache): Bu cevap "y_nerge_m_h.staj" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: kimlik no : adı soyadı : n öğrenci no : n i̇ bölümü : i̇ c cep t
+elefonu : n e e-posta adresi : r i̇kametgâh adresi : ğ ö sürekli yazışma adresi : tarih i̇mza : mersis numarası n i̇ vergi kimlik numarası : n i̇ unvanı : r e hizmet alanı : y ş te
+lefon : i̇ n e-posta adresi : a l staj adresi : i p a y çalışan mühendis sayısı : (uzmanlık alanına göre) j banka adı : a t banka şube adı ve kodu : s iban : See: 32:32.1:17269-17764, 32:32.1:18090-18581, 8:8.1:30406-30904
+
+--- Query #6 ---
+Question: Öğrenci işleri bürosunda çalışan personeller kimlerdir?
+Answer (Retrieved from Cache): Bu cevap "mu_muafiyet_intibak_islemleri_yonergesi_v03" başlıklı belgenin 14.1 bölümünden alınmıştır. Cevabınız: al programında aldığı dersler öğrencinin anadalından muaf sayılamaz See: 14:14.1:4114-4614, 17:17.1:11093-11593, 17:17.1:2052-2549
+
+--- Query #7 ---
+Question: Döner sermaye saymanlığında görevli kişinin adı ve e‑posta adresi nedir?
+Answer (Retrieved from Cache): Bu cevap "y_nerge_m_h.staj" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: kimlik no : adı soyadı : n öğrenci no : n i̇ bölümü : i̇ c cep t
+elefonu : n e e-posta adresi : r i̇kametgâh adresi : ğ ö sürekli yazışma adresi : tarih i̇mza : mersis numarası n i̇ vergi kimlik numarası : n i̇ unvanı : r e hizmet alanı : y ş te
+lefon : i̇ n e-posta adresi : a l staj adresi : i p a y çalışan mühendis sayısı : (uzmanlık alanına göre) j banka adı : a t banka şube adı ve kodu : s iban : See: 32:32.1:17269-17764, 32:32.1:18090-18581, 8:8.1:35356-35853
+
+--- Query #8 ---
+Question: Bilgisayar Mühendisliği bölüm sekreterliğinde görevli kişi kimdir?
+Answer (Retrieved from Cache): Bu cevap "organizasyon_semasi" başlıklı belgenin 27.6 bölümünden alınmıştır. Cevabınız: bilgisayar mühendisliği (bölüm başkanı) 5 See: 27:27.6:0-396, 28:28.22:0-12, 4:4.8:0-87
+
+--- Query #9 ---
+Question: Müdek ve Sürekli İyileştirme Komisyonu'nun adı nedir?
+Answer (Retrieved from Cache): Bu cevap "y_nerge_m_h.staj" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: kimlik no : adı soyadı : n öğrenci no : n i̇ bölümü : i̇ c cep t
+elefonu : n e e-posta adresi : r i̇kametgâh adresi : ğ ö sürekli yazışma adresi : tarih i̇mza : mersis numarası n i̇ vergi kimlik numarası : n i̇ unvanı : r e hizmet alanı : y ş te
+lefon : i̇ n e-posta adresi : a l staj adresi : i p a y çalışan sayısı : j banka adı : a t banka şube adı ve kodu : s iban : n türü : i j başlangıç ve bitiş See: 32:32.1:18090-18581, 5:5.1:0-39, 9:9.1:6167-6667
+
+--- Query #10 ---
+Question: İntibak Komisyonu başkanı kimdir?
+Answer (Retrieved from Cache): Bu cevap "y_nerge_m_h.staj" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: tarih tarih tarih (i̇mza) kaşe (i̇mza) (i̇mza) uzun dönem staj başvuru formu t See: 32:32.1:18090-18581, 5:5.7:0-18, 27:27.6:0-396
+
+--- Query #11 ---
+Question: Mühendislik Projeleri Komisyonu'nun başkanı kimdir?
+Answer (Retrieved from Cache): Bu cevap "komisyonlar" başlıklı belgenin 5.27 bölümünden alınmıştır. Cevabınız: mühendislik projeleri komisyonu See: 5:5.27:0-31, 27:27.6:0-396, 22:22.1:9040-9537
+
+--- Query #12 ---
+Question: İş Sağlığı ve Güvenliği Komisyonu'nda kim başkandır?
+Answer (Retrieved from Cache): Bu cevap "y_nerge_m_h.staj" başlıklı belgenin 32.1 bölümünden alınmıştır. Cevabınız: tarih tarih tarih (i̇mza) kaşe (i̇mza) (i̇mza) uzun dönem staj başvuru formu t See: 32:32.1:18090-18581, 5:5.51:0-34, 32:32.1:17269-17764
+
+--- Query #13 ---
+Question: Mezunlarla İlişkiler Komisyonu'nda hangi öğretim üyeleri yer almaktadır?
+Answer (Retrieved from Cache): Bu cevap "mu_ozel_ogrenci_yonergesi_2023_v02" başlıklı belgenin 17.1 bölümünden alınmıştır. Cevabınız: diğer yükseköğretim kurumlarından alınacak derslerin üniversite bünyesindeki programlarda açılmamış olması gerekir See: 17:17.1:6987-7487, 32:32.1:18090-18581, 17:17.1:2052-2549
+
+--- Query #14 ---
+Question: Fakülte Kurulu'nda bölüm başkanı olarak adı geçen profesörlerden bazıları kimlerdir?
+Answer (Retrieved from Cache): Bu cevap "organizasyon_semasi" başlıklı belgenin 27.6 bölümünden alınmıştır. Cevabınız: biyomühendislik (bölüm başkanı) 5 See: 27:27.6:0-396, 31:31.1:11472-11972, 21:21.1:28011-28506
+
+--- Query #15 ---
+Question: Kurullar bölümünde adı geçen seçilmiş üyelerden birinin adını söyleyiniz.
+Answer (Retrieved from Cache): Bu cevap "mezuniyetyönergesi_sonhali_09.03.2020_v01" başlıklı belgenin 11.1 bölümünden alınmıştır. Cevabınız: , b) sertifika alınan programın adı bağ
+lı bulunduğu bölümün adından farklı ise yandal yapılan bölümü adı, c) sertifika alınan programın adı, ç) mezun olunan anadal programın adı bağlı bulunduğu bölümün adından farklı ise anadal yapılan bölümü adı, d) mezun olunan anadal programının adı See: 11:11.1:24644-25144, 23:23.1:22173-22670, 21:21.1:10691-11191
+
+--- Query #16 ---
+Question: Marmara Üniversitesi'ndeki 'öğrenci ve öğretim elemanı değişim programları komisyonu'nun amacı nedir?
+Answer (Retrieved from Cache): Bu cevap "öğrenme güvencesi sistemi yönergesi" başlıklı belgenin 34.1 bölümünden alınmıştır. Cevabınız: 2024 tarih ve 32630 sayılı resmi gazete’de yayımlanan lisansüstü eğitim ve öğretim yönetmeliği, marmara üniversitesi eğitim-öğretim programları uygulama yönergesi’ne, marmara üniversitesi sosyal transkript yönergesi’ne dayanılarak hazırlanmıştır See: 34:34.1:2047-2541, 5:5.15:0-56, 32:32.1:13990-14486

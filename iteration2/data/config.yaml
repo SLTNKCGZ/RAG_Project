@@ -2,7 +2,7 @@ pipeline:
   intent_detector: "RuleIntentDetector"
   query_writer: "HeuristicQueryWriter" 
   retriever: "HybridRetriever"
-  reranker: "CosineReranker"
+  reranker: "HybridReranker"
   answer_agent: "TemplateAnswerAgent"
 
 params:

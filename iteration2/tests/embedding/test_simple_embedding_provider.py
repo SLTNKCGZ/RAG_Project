@@ -10,4 +10,4 @@ def test_embedding_is_deterministic() -> None:
 
     assert v1 == v2
     assert v1 != v3
-    assert len(v1) == 8
+    assert len(v1) == 128
