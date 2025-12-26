@@ -1,4 +1,4 @@
-## CSE3063F25Grp1 - Java→Python RAG 
+## CSE3063F25Grp1 - Iteration2
 
 ## Group Members
 
@@ -12,12 +12,15 @@
 
 ## Project Description
 
-Python implementation of the Retrieval-Augmented Generation (RAG) system, fully aligned with the original Java version of the project.
+This project is the second iteration of a Retrieval-Augmented Generation (RAG) system developed for the Object Oriented Software Design term project.
 
-Porting to Python
 
-This project is a direct Python port of the Java-based RAG system from the first iteration. The Python version preserves the same architecture, class structure as the Java codebase. All components are rewritten with type annotations, and the unit tests have been migrated from JUnit to pytest to ensure feature and behavior equivalence.
-
+The architecture follows **SOLID principles** and **GRASP patterns**:
+- **Strategy Pattern**: Abstract base classes (`Retriever`, `Reranker`, `AnswerAgent`, `QueryWriter`) enable interchangeable implementations
+- **Dependency Inversion**: Components depend on abstractions, not concrete implementations
+- **Template Method**: `RagPipeline` defines the algorithm skeleton with customizable steps
+- **Information Expert & Low Coupling**: Each component has a single responsibility and minimal dependencies
+- **Creator & Controller**: `RagOrchestrator` coordinates the pipeline execution
 
 ## Project Management
 
@@ -41,9 +44,20 @@ We used the following tools for project management and task tracking:
 
 ## Running the RAG pipeline
 
+### Single Query Mode
+
 ```bash
 python -m src.main --config data/config.yaml --q "Hangi harfli başarı notları başarısız notlardır?"
 ```
+
+### Batch Mode
+
+Process multiple queries from a file:
+
+```bash
+python -m src.main --config data/config.yaml --batch eval/questions.json
+```
+
 
 
 During execution:
@@ -55,13 +69,12 @@ During execution:
 
 ## Config schema (`data/config.yaml`)
 
-
 ```yaml
 pipeline:
   intent_detector: "RuleIntentDetector"      # Intent detector class name
   query_writer: "HeuristicQueryWriter"       # Query writer
-  retriever: "KeywordRetriever"              # Keyword-based retriever
-  reranker: "SimpleReranker"                 # Reranker
+  retriever: "KeywordRetriever"              # Retriever type (KeywordRetriever, VectorRetriever, HybridRetriever)
+  reranker: "SimpleReranker"                 # Reranker type (SimpleReranker, CosineReranker, HybridReranker)
   answer_agent: "TemplateAnswerAgent"        # Answer agent
 
 params:
@@ -84,13 +97,18 @@ paths:
 ## Directory layout
 
 ```text
-iteration1_py/
+iteration2/
   data/
     chunks.json          # RAG chunks (document fragments)
     config.yaml          # Pipeline configuration
     intent_rules.yaml    # Intent rules
     stopwords.yaml       # Stopword list
     logs/                # JSONL run logs
+
+  eval/
+    ground_truth.json    # Ground truth answers for evaluation
+    questions.json       # Test questions
+    run_eval.py          # Evaluation script
 
   src/
     __init__.py
@@ -110,6 +128,13 @@ iteration1_py/
       chunk_loader.py
       chunk_store.py
       chunks.json
+    embedding/           # Embedding providers for vector retrieval
+      embedding_provider.py
+      simple_embedding_provider.py
+    eval/                # Evaluation harness
+      eval_harness.py
+    index/               # Vector index for semantic search
+      vector_index.py
     intent/              # Intent detection & rules loader
       __init__.py
       intent_detector.py
@@ -127,33 +152,42 @@ iteration1_py/
       rag_orchestrator.py
       rag_pipeline.py
       sequential_rag_pipeline.py
-    reranker/            # Reranker interface and SimpleReranker
+    reranker/            # Reranker implementations
       __init__.py
+      cosine_reranker.py
+      hybrid_reranker.py
       reranker.py
       simple_reranker.py
-    retrieval/           # KeywordRetriever and retriever interface
+    retrieval/           # Retriever implementations
       __init__.py
+      hybrid_retriever.py
       keyword_retriever.py
+      query_cache.py
       retriever.py
+      vector_retriver.py
     trace/               # Trace events and JSONL sink
       __init__.py
       jsonl_trace_sink.py
       trace_bus.py
       trace_event.py
       trace_sink.py
-    writer/              # HeuristicQueryWriter and writer interface
+    writer/              # Query writer implementations
       __init__.py
       heuristic_query_writer.py
+      query_decomposer.py
       query_writer_abstract.py
+      simple_stemmer.py
+      term_weighting.py
     main.py              # CLI entry point (python -m src.main)
 
   tests/
     answer/              # TemplateAnswerAgent tests
+    embedding/           # Embedding provider tests
     intent/              # RuleIntentDetector tests
     model/               # Answer model tests
-    reranker/            # SimpleReranker tests
-    retrieval/           # KeywordRetriever tests
-    writer/              # HeuristicQueryWriter tests
+    reranker/            # Reranker tests (Simple, Cosine, Hybrid)
+    retrieval/           # Retriever tests (Keyword, Hybrid)
+    writer/              # Query writer tests
 ```
 
 ---
@@ -169,6 +203,20 @@ iteration1_py/
   ```bash
   pytest tests/answer/test_template_answer_agent.py 
   pytest tests/retrieval/test_keyword_retriever.py
+  pytest tests/retrieval/test_hybrid_retriever.py
   pytest tests/writer/test_heuristic_query_writer.py
+  pytest tests/reranker/test_simple_reranker.py
+  pytest tests/reranker/test_cosine_reranker.py
+  pytest tests/reranker/test_hybrid_reranker.py
   ```
+
+## Running Evaluation
+
+To evaluate the RAG system against ground truth answers:
+
+```bash
+python eval/run_eval.py
+```
+
+This will run the evaluation harness using the questions in `eval/questions.json` and compare results against `eval/ground_truth.json`.
 
